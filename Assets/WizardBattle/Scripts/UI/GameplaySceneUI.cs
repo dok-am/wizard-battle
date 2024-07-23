@@ -1,6 +1,6 @@
 using IT.CoreLib.UI;
 
-namespace IT.WizardBattle
+namespace IT.WizardBattle.UI
 {
     public class GameplaySceneUI : SceneUIBase
     {
