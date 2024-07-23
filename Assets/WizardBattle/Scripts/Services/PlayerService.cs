@@ -21,6 +21,8 @@ namespace IT.WizardBattle.Services
         {
             _spawnPointsService = bootstrap.GetService<SpawnPointsService>();
             RespawnPlayer(_spawnPointsService.GetPlayerSpawnPoint);
+
+            bootstrap.GetService<CameraService>().SetTarget(_player.transform);
         }
 
         public void Destroy()

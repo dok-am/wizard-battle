@@ -14,6 +14,7 @@ namespace IT.WizardBattle.Application
             AddService<SpellDataStorage>();
             AddService<SpawnPointsService>();
             AddService<PlayerService>(_playerServicePrefab.gameObject);
+            AddService<CameraService>();
         }
 
         protected override void InitializeScene()

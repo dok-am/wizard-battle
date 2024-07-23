@@ -17,10 +17,10 @@ namespace IT.WizardBattle.Player
 
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
-            _characterMoveController.Move(_playerInputController.MoveValue, Time.deltaTime);
-            _characterMoveController.Rotate(_playerInputController.RotateValue, Time.deltaTime);
+            _characterMoveController.Move(_playerInputController.MoveValue, Time.fixedDeltaTime);
+            _characterMoveController.Rotate(_playerInputController.RotateValue, Time.fixedDeltaTime);
         }
     }
 }
