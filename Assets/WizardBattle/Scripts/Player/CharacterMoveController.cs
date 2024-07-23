@@ -11,10 +11,14 @@ namespace IT.WizardBattle.Game
         [SerializeField] private float _moveInertion = 5.0f;
         [SerializeField] private float _rotateInertion = 5.0f;
 
+        [SerializeField] private Animator _animator;
+
         private Rigidbody2D _rigidbody;
 
         private float _moveValue;
         private float _rotationValue;
+
+        private const string ANIMATOR_WALK_KEY = "Walk";
 
         private void Awake()
         {
@@ -45,6 +49,11 @@ namespace IT.WizardBattle.Game
         {
             _rotationValue = Mathf.Lerp(_rotationValue, direction * _rotationSpeed, _rotateInertion * deltaTime);
             _rigidbody.MoveRotation(_rigidbody.rotation - _rotationValue * deltaTime);
+        }
+
+        private void Update()
+        {
+            _animator.SetBool(ANIMATOR_WALK_KEY, Mathf.Abs(_moveValue) > _movementSpeed/4.0f);
         }
     }
 }
