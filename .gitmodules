@@ -1,0 +1,3 @@
+[submodule "Assets/CoreLib"]
+	path = Assets/CoreLib
+	url = git@github.com:dok-am/ironic-title-corelib.git
