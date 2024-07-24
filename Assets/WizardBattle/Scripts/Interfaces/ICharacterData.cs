@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿
 
-namespace IT.WizardBattle.Data
+namespace IT.WizardBattle.Interfaces
 {
     public interface ICharacterData 
     {

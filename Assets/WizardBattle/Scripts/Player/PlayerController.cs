@@ -1,14 +1,20 @@
 using IT.WizardBattle.Data;
 using IT.WizardBattle.Game;
 using IT.WizardBattle.Services;
+using IT.WizardBattle.Interfaces;
 using UnityEngine;
 
 namespace IT.WizardBattle.Player
 {
     [RequireComponent(typeof(CharacterMoveController))]
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour, IPlayerInstance
     {
-        public CharacterMoveController MoveController => _characterMoveController;
+        
+        public GameObject GameObject => gameObject;
+        public Transform ShootingPoint => _shootingPoint;
+
+        [SerializeField] private Transform _shootingPoint;
+
         private CharacterMoveController _characterMoveController;
 
         private PlayerService _playerService;
@@ -30,10 +36,23 @@ namespace IT.WizardBattle.Player
             UpdateData(characterData);
         }
 
+        public void Deinitialize()
+        {
+            _playerInputService.OnNextSpellPressed -= OnNextSpellPressed;
+            _playerInputService.OnPreviousSpellPressed -= OnPreviousSpellPressed;
+        }
+
         public void UpdateData(ICharacterData characterData)
         {
             _characterMoveController.SetSpeed(characterData.Speed, characterData.RotationSpeed);
         }
+
+        public void ReceiveDamage(float damage)
+        {
+            throw new System.NotImplementedException();
+        }
+
+
 
         private void OnNextSpellPressed()
         {
@@ -50,5 +69,7 @@ namespace IT.WizardBattle.Player
             _characterMoveController.Move(_playerInputService.MoveValue, Time.fixedDeltaTime);
             _characterMoveController.Rotate(_playerInputService.RotateValue, Time.fixedDeltaTime);
         }
+
+        
     }
 }

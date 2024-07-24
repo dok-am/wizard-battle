@@ -58956,6 +58956,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sceneUIPrefab: {fileID: 4759984844155193159, guid: 2390a7e3a13d4024b891ad1f02a902c4, type: 3}
   _playerServicePrefab: {fileID: 1804902536574830808, guid: addb15dfe3204f844866c2530fbe4299, type: 3}
+  _playerShootServicePrefab: {fileID: 6191907387915908690, guid: e90203055693f2c468777c386ed55650, type: 3}
 --- !u!4 &1823813783
 Transform:
   m_ObjectHideFlags: 0
@@ -58965,7 +58966,7 @@ Transform:
   m_GameObject: {fileID: 1823813781}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1057.4628, y: 528.6754, z: 4.120421}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

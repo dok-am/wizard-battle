@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using IT.WizardBattle.Interfaces;
 
 namespace IT.WizardBattle.Data
 {

@@ -1,5 +1,5 @@
-using IT.CoreLib.Interfaces;
 using System;
+using IT.CoreLib.Interfaces;
 using UnityEngine.InputSystem;
 
 namespace IT.WizardBattle.Services

@@ -8,6 +8,7 @@ namespace IT.WizardBattle.Application
     {
 
         [SerializeField] private PlayerService _playerServicePrefab;
+        [SerializeField] private PlayerShootService _playerShootServicePrefab;
         
         protected override void InitializeServices()
         {
@@ -16,6 +17,7 @@ namespace IT.WizardBattle.Application
             AddService<SpawnPointsService>();
             AddService<PlayerService>(_playerServicePrefab.gameObject);
             AddService<CameraService>();
+            AddService<PlayerShootService>(_playerShootServicePrefab.gameObject);
         }
 
         protected override void InitializeScene()

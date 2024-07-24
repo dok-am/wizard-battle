@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3622748708767648902}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ShootingPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 3805225561878722298}
   - component: {fileID: 3215884432179920485}
   - component: {fileID: 1508298146325856327}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -155,7 +155,7 @@ GameObject:
   - component: {fileID: 8264205907047361849}
   - component: {fileID: 1419632764485274451}
   - component: {fileID: 1790749920723723987}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,6 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20f22e6fc8bd3c647a170f87538e20f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shootingPoint: {fileID: 3622748708767648902}
 --- !u!114 &8264205907047361849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -290,7 +291,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7634475301673210558}
   - component: {fileID: 8212847658388709668}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Posoh
   m_TagString: Untagged
   m_Icon: {fileID: 0}

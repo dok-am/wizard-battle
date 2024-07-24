@@ -1,26 +1,29 @@
-using IT.CoreLib.Interfaces;
-using IT.WizardBattle.Data;
-using IT.WizardBattle.Player;
 using System;
 using UnityEngine;
+using IT.CoreLib.Interfaces;
+using IT.WizardBattle.Data;
+using IT.WizardBattle.Interfaces;
+
+
 
 namespace IT.WizardBattle.Services
 {
     public class PlayerService : MonoBehaviour, IService
     {
-        [SerializeField] private PlayerController _playerPrefab;
+        [SerializeField] private GameObject _playerPrefab;
 
         public event Action<SpellData> OnSpellSelected;
 
         public ICharacterData PlayerData => _playerData;
         public SpellData[] AvailableSpells => _playerData.AvailableSpells.ToArray();
         public SpellData SelectedSpell => _selectedSpell;
+        public Transform PlayerShootingPoint => _player.ShootingPoint;
 
 
         private PlayerData _playerData;
         private SpellData _selectedSpell;
 
-        private PlayerController _player;
+        private IPlayerInstance _player;
         
         private SpawnPointsService _spawnPointsService;
         private PlayerInputService _playerInputService;
@@ -41,7 +44,7 @@ namespace IT.WizardBattle.Services
 
             RespawnPlayer(_spawnPointsService.GetPlayerSpawnPoint);
 
-            bootstrap.GetService<CameraService>().SetTarget(_player.transform);
+            bootstrap.GetService<CameraService>().SetTarget(_player.GameObject.transform);
         }
 
         public void Destroy()
@@ -56,7 +59,11 @@ namespace IT.WizardBattle.Services
             if (_player != null)
                 DestroyPlayer();
 
-            _player = Instantiate(_playerPrefab.gameObject, position, Quaternion.identity).GetComponent<PlayerController>();
+            _player = Instantiate(_playerPrefab, position, Quaternion.identity).GetComponent<IPlayerInstance>();
+
+            if (_player == null)
+                throw new Exception("[PLAYER] Player's prefab is wrong!");
+
             _player.Initialize(this, _playerInputService, _playerData);
         }
 
@@ -88,7 +95,9 @@ namespace IT.WizardBattle.Services
 
         private void DestroyPlayer()
         {
-            Destroy(_player.gameObject);
+            if (_player != null)
+                _player.Deinitialize();
+
             _player = null;
         }
 
