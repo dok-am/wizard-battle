@@ -57,10 +57,10 @@ namespace IT.WizardBattle.Game
 
         public void CastSpell(Vector2 position, Vector2 direction)
         {
-            transform.position = position;
-
             float rotation = Vector2.SignedAngle(Vector2.up, direction);
-            _rigidbody.MovePositionAndRotation(position, rotation);
+            
+            transform.position = position;
+            transform.rotation = Quaternion.AngleAxis(rotation, Vector3.forward);
 
             Enabled = true;
             _isShooting = true;
@@ -85,7 +85,7 @@ namespace IT.WizardBattle.Game
         {
             //TODO: make normal
             _isShooting = false;
-            gameObject.SetActive(false);
+            Enabled = false;
         }
     }
 }
