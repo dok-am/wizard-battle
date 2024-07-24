@@ -9,12 +9,16 @@ namespace IT.WizardBattle.Data
         public string Id => _id;
         public int Damage => _damage;
         public Sprite Icon => _icon;
+        public Color IconTint => _iconTint;
         public GameObject ProjectileVisual => _projectileVisual;
 
+        [Header("Data")]
         [SerializeField] private string _id;
         [SerializeField] private int _damage;
 
+        [Header("Visuals")]
         [SerializeField] private Sprite _icon;
+        [SerializeField] private Color _iconTint = Color.white;
         [SerializeField] private GameObject _projectileVisual;
     }
 }

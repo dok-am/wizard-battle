@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: lightning
   _damage: 30
-  _icon: {fileID: 0}
+  _icon: {fileID: 7779550629027557947, guid: ccded7efdfa54034395949d15fda0767, type: 3}
+  _iconTint: {r: 1, g: 0.9136039, b: 0.3150943, a: 1}
   _projectileVisual: {fileID: 0}

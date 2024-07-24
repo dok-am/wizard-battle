@@ -11,6 +11,7 @@ namespace IT.WizardBattle.Application
         
         protected override void InitializeServices()
         {
+            AddService<PlayerInputService>();
             AddService<SpellDataStorage>();
             AddService<SpawnPointsService>();
             AddService<PlayerService>(_playerServicePrefab.gameObject);

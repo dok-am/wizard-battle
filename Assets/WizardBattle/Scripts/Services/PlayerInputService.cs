@@ -1,10 +1,10 @@
+using IT.CoreLib.Interfaces;
 using System;
-using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace IT.WizardBattle
+namespace IT.WizardBattle.Services
 {
-    public class PlayerInputController : MonoBehaviour
+    public class PlayerInputService : IService, IUpdatable
     {
         public float MoveValue { get; private set; }
         public float RotateValue { get; private set; }
@@ -20,7 +20,8 @@ namespace IT.WizardBattle
         private InputAction _nextSpellAction;
         private InputAction _previousSpellAction;
 
-        private void Awake()
+
+        public void Initialize()
         {
             _moveAction = InputSystem.actions.FindAction("Move");
             _rotateAction = InputSystem.actions.FindAction("Rotate");
@@ -28,16 +29,42 @@ namespace IT.WizardBattle
             _nextSpellAction = InputSystem.actions.FindAction("Next");
             _previousSpellAction = InputSystem.actions.FindAction("Previous");
 
-            _shootAction.started += _ => { OnShootPressed?.Invoke(); };
-            _nextSpellAction.started += _ => { OnNextSpellPressed?.Invoke(); };
-            _previousSpellAction.started += _ => { OnPreviousSpellPressed?.Invoke(); };
+            _shootAction.started += ShootPressed;
+            _nextSpellAction.started += NextSpellPressed;
+            _previousSpellAction.started += PreviousSpellPressed;
+        }
+
+        public void OnInitialized(IBootstrap bootstrap)
+        {
 
         }
 
-        private void Update()
+        public void Destroy()
+        {
+            _shootAction.started -= ShootPressed;
+            _nextSpellAction.started -= NextSpellPressed;
+            _previousSpellAction.started -= PreviousSpellPressed;
+        }
+
+        public void Update(float dt)
         {
             MoveValue = _moveAction.IsPressed() ? _moveAction.ReadValue<float>() : 0.0f;
             RotateValue = _rotateAction.IsPressed() ? _rotateAction.ReadValue<float>() : 0.0f;
+        }
+
+        private void ShootPressed(InputAction.CallbackContext context)
+        {
+            OnShootPressed?.Invoke();
+        }
+
+        private void NextSpellPressed(InputAction.CallbackContext context)
+        {
+            OnNextSpellPressed?.Invoke();
+        }
+
+        private void PreviousSpellPressed(InputAction.CallbackContext context)
+        {
+            OnPreviousSpellPressed?.Invoke();
         }
     }
 }

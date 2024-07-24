@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: icicle
   _damage: 20
-  _icon: {fileID: 0}
+  _icon: {fileID: -3034759746691774636, guid: 9f80c2fb138cf1649b20e1867c4f8fbb, type: 3}
+  _iconTint: {r: 0.216981, g: 0.90906173, b: 1, a: 1}
   _projectileVisual: {fileID: 0}

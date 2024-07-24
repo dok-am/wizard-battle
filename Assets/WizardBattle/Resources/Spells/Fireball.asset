@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: fireball
   _damage: 10
-  _icon: {fileID: 0}
+  _icon: {fileID: -3672923369707170902, guid: 2d58ce2b369c382418bcf4cd07d5bc37, type: 3}
+  _iconTint: {r: 1, g: 0.216981, b: 0.216981, a: 1}
   _projectileVisual: {fileID: 0}
