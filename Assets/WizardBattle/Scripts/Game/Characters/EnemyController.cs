@@ -22,6 +22,8 @@ namespace IT.WizardBattle.Game
             }
         }
 
+        public CharacterMoveController MoveController => _moveController;
+
         [SerializeField] private Transform _visualContainer;
 
         private CharacterMoveController _moveController;

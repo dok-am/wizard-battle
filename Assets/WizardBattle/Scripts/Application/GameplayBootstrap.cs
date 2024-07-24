@@ -19,6 +19,7 @@ namespace IT.WizardBattle.Application
             AddService<SpellDataStorage>();
             AddService<EnemyDataStorage>();
             AddService<SpawnPointsService>();
+            AddService<EnemyAIService>();
             AddService<PlayerService>(_playerServicePrefab.gameObject);
             AddService<CameraService>();
             AddService<PlayerCastSpellsService>(_playerCastSpellsServicePrefab.gameObject);

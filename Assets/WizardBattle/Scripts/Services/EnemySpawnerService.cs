@@ -15,6 +15,7 @@ namespace IT.WizardBattle.Services
 
         private Vector2[] _spawnPoints;
         private EnemyData[] _enemiesData;
+        private EnemyAIService _enemyAIService;
 
         private bool _isSpawning;
         private float _spawnTimer;
@@ -29,6 +30,7 @@ namespace IT.WizardBattle.Services
         {
             _spawnPoints = bootstrap.GetService<SpawnPointsService>().EnemiesSpawnPoints;
             _enemiesData = bootstrap.GetService<EnemyDataStorage>().GetAllModels();
+            _enemyAIService = bootstrap.GetService<EnemyAIService>();
         }
 
         public void Destroy()
@@ -71,6 +73,7 @@ namespace IT.WizardBattle.Services
 
             instance.SetupEnemy(enemyData);
             instance.Spawn(GetRandomItem(_spawnPoints));
+            _enemyAIService.AddEnemy(instance.MoveController);
         }
 
         private IEnemyInstance GetEnemyFromPool(string typeId)

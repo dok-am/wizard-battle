@@ -17,6 +17,7 @@ namespace IT.WizardBattle.Services
         public SpellData[] AvailableSpells => _playerData.AvailableSpells.ToArray();
         public SpellData SelectedSpell => _selectedSpell;
         public Transform PlayerShootingPoint => _player.ShootingPoint;
+        public Transform PlayerTransform => _player.GameObject.transform;
 
 
         private PlayerData _playerData;

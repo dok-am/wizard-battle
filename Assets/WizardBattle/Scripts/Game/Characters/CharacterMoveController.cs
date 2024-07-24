@@ -51,6 +51,14 @@ namespace IT.WizardBattle.Game
             _rigidbody.MoveRotation(_rigidbody.rotation - _rotationValue * deltaTime);
         }
 
+        public void RotateToward(Vector2 target, float deltaTime)
+        {
+            Vector2 direction = target - (Vector2)transform.position;
+            float angle = Vector2.SignedAngle(transform.up, direction);
+
+            _rigidbody.MoveRotation(_rigidbody.rotation + angle * _rotationSpeed * deltaTime);
+        }
+
         private void Update()
         {
             if (_animator != null) 
