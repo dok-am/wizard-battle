@@ -5,6 +5,8 @@ namespace IT.WizardBattle.Data
 {
     public class PlayerData : ICharacterData
     {
+        public string TypeId => "Player";
+
         public float Health { get; set; }
 
         public float Defense { get; set; }
@@ -16,5 +18,6 @@ namespace IT.WizardBattle.Data
         public float MeleeDamage { get; set; }
 
         public List<SpellData> AvailableSpells { get; } = new List<SpellData>();
+
     }
 }

@@ -53,7 +53,8 @@ namespace IT.WizardBattle.Game
 
         private void Update()
         {
-            _animator.SetBool(ANIMATOR_WALK_KEY, Mathf.Abs(_moveValue) > _movementSpeed/4.0f);
+            if (_animator != null) 
+                _animator.SetBool(ANIMATOR_WALK_KEY, Mathf.Abs(_moveValue) > _movementSpeed/4.0f);
         }
     }
 }

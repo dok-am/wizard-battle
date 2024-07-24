@@ -15,7 +15,7 @@ namespace IT.WizardBattle.Game
             {
                 return gameObject.activeSelf;
             }
-            set 
+            private set 
             {
                 gameObject.SetActive(value);
             }
@@ -55,13 +55,14 @@ namespace IT.WizardBattle.Game
             _spellVisuals = Instantiate(spellData.ProjectileVisual, _visualsContainer);
         }
 
-        public void StartShooting(Vector2 position, Vector2 direction)
+        public void CastSpell(Vector2 position, Vector2 direction)
         {
             transform.position = position;
 
             float rotation = Vector2.SignedAngle(Vector2.up, direction);
             _rigidbody.MovePositionAndRotation(position, rotation);
 
+            Enabled = true;
             _isShooting = true;
         }
 

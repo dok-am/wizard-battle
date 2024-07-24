@@ -40,9 +40,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1869355992298901475}
-  - component: {fileID: 6191907387915908690}
+  - component: {fileID: 973984620510263565}
   m_Layer: 0
-  m_Name: PlayerShootService
+  m_Name: PlayerCastSpellService
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,7 +64,7 @@ Transform:
   - {fileID: 704648087900959871}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6191907387915908690
+--- !u!114 &973984620510263565
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -73,7 +73,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1028954071342510022}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d199f29fb0dfef34f8b56d3653f5d94a, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cbde444fd8fd8f478b15e74312ae487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _spellInstancePrefab: {fileID: 5441591525661232507, guid: 4dec9d12970f79247a61915e1132ef37, type: 3}

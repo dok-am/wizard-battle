@@ -1,10 +1,8 @@
-using IT.WizardBattle.Data;
-using IT.WizardBattle.Game;
 using IT.WizardBattle.Services;
 using IT.WizardBattle.Interfaces;
 using UnityEngine;
 
-namespace IT.WizardBattle.Player
+namespace IT.WizardBattle.Game.Player
 {
     [RequireComponent(typeof(CharacterMoveController))]
     public class PlayerController : MonoBehaviour, IPlayerInstance

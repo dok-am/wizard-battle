@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace IT.WizardBattle.Services
 {
-    public class PlayerShootService : MonoBehaviour, IService
+    public class PlayerCastSpellsService : MonoBehaviour, IService
     {
         [SerializeField] private GameObject _spellInstancePrefab;
         [SerializeField] private Transform _spellsPoolContainer;
@@ -56,7 +56,7 @@ namespace IT.WizardBattle.Services
 
             Transform shootingPoint = _playerService.PlayerShootingPoint;
 
-            spellInstance.StartShooting(shootingPoint.position, shootingPoint.up);
+            spellInstance.CastSpell(shootingPoint.position, shootingPoint.up);
         }
 
 
@@ -67,7 +67,6 @@ namespace IT.WizardBattle.Services
             {
                 if (!instance.Enabled)
                 {
-                    instance.Enabled = true;
                     return instance;
                 }
             }

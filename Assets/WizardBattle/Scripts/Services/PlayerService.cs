@@ -5,7 +5,6 @@ using IT.WizardBattle.Data;
 using IT.WizardBattle.Interfaces;
 
 
-
 namespace IT.WizardBattle.Services
 {
     public class PlayerService : MonoBehaviour, IService
@@ -42,7 +41,7 @@ namespace IT.WizardBattle.Services
             _spawnPointsService = bootstrap.GetService<SpawnPointsService>();
             _playerInputService = bootstrap.GetService<PlayerInputService>();
 
-            RespawnPlayer(_spawnPointsService.GetPlayerSpawnPoint);
+            RespawnPlayer(_spawnPointsService.PlayerSpawnPoint);
 
             bootstrap.GetService<CameraService>().SetTarget(_player.GameObject.transform);
         }
