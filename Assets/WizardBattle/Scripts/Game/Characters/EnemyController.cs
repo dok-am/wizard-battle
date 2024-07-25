@@ -1,4 +1,5 @@
 ﻿using IT.Game.Services;
+using IT.WizardBattle.Assets.WizardBattle.Scripts.Game.Characters;
 using IT.WizardBattle.Data;
 using IT.WizardBattle.Game.Battle;
 using IT.WizardBattle.Interfaces;
@@ -33,6 +34,8 @@ namespace IT.WizardBattle.Game
         [SerializeField] private Transform _visualContainer;
 
         private CharacterMoveController _moveController;
+        private CharacterDamageEffect _characterDamageEffect;
+
         private EnemyData _enemyData;
         private GameObject _visual;
         private MeleeEnemyAttack _meleeAttack;
@@ -40,6 +43,7 @@ namespace IT.WizardBattle.Game
         private void Awake()
         {
             _moveController = GetComponent<CharacterMoveController>();
+            _characterDamageEffect = GetComponent<CharacterDamageEffect>();
         }
 
         public void SetupEnemy(EnemyStaticData characterData)
@@ -51,6 +55,7 @@ namespace IT.WizardBattle.Game
             ResetVisual();
 
             _visual = Instantiate(characterData.EnemyPrefab, _visualContainer);
+            _characterDamageEffect.Initialize();
         }
 
         public void Deinitialize()
@@ -67,6 +72,8 @@ namespace IT.WizardBattle.Game
         public void ReceiveDamage(float damage)
         {
             _enemyData.Health = SimpleDamageCalculator.CalculateHealth(_enemyData.Health, damage, _enemyData.EnemyStaticData.Defense);
+            _characterDamageEffect.PlayDamageEffect();
+            
             if (_enemyData.Health == 0.0f)
             {
                 OnEnemyReadyToDie?.Invoke(this);
@@ -77,6 +84,7 @@ namespace IT.WizardBattle.Game
         public void Die()
         {
             //TODO: add VFX
+            _characterDamageEffect.StopDamageEffect();
             Enabled = false;
         }
 

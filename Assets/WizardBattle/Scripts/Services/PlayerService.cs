@@ -104,7 +104,6 @@ namespace IT.WizardBattle.Services
             if (_playerData.Health == 0.0f) {
                 //TODO: do in normal
                 _player.Die();
-                DestroyPlayer();
                 OnPlayerDied?.Invoke();
             }
         }

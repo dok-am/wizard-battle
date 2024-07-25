@@ -1,6 +1,7 @@
 using IT.WizardBattle.Services;
 using IT.WizardBattle.Interfaces;
 using UnityEngine;
+using IT.WizardBattle.Assets.WizardBattle.Scripts.Game.Characters;
 
 namespace IT.WizardBattle.Game.Player
 {
@@ -14,6 +15,7 @@ namespace IT.WizardBattle.Game.Player
         [SerializeField] private Transform _shootingPoint;
 
         private CharacterMoveController _characterMoveController;
+        private CharacterDamageEffect _characterDamageEffect;
 
         private PlayerService _playerService;
         private PlayerInputService _playerInputService;
@@ -22,6 +24,8 @@ namespace IT.WizardBattle.Game.Player
         private void Awake()
         {
             _characterMoveController = GetComponent<CharacterMoveController>();
+            _characterDamageEffect = GetComponent<CharacterDamageEffect>();
+            _characterDamageEffect.Initialize();
         }
 
         public void Initialize(PlayerService playerService, PlayerInputService playerInputService, ICharacterData characterData)
@@ -38,7 +42,6 @@ namespace IT.WizardBattle.Game.Player
         {
             _playerInputService.OnNextSpellPressed -= OnNextSpellPressed;
             _playerInputService.OnPreviousSpellPressed -= OnPreviousSpellPressed;
-            gameObject.SetActive(false);
         }
 
         public void UpdateData(ICharacterData characterData)
@@ -48,12 +51,14 @@ namespace IT.WizardBattle.Game.Player
 
         public void ReceiveDamage(float damage)
         {
+            _characterDamageEffect.PlayDamageEffect();
             _playerService.AddDamage(damage);
         }
 
         public void Die()
         {
-            
+            _characterDamageEffect.StopDamageEffect();
+            gameObject.SetActive(false);
         }
 
 
