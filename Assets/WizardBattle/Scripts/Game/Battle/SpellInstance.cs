@@ -8,7 +8,9 @@ namespace IT.WizardBattle.Game
     [RequireComponent(typeof(Rigidbody2D))]
     public class SpellInstance : MonoBehaviour, ISpellInstance
     {
-        public string SpellId => _spellId;
+        public event Action<SpellData, GameObject, Vector2> OnHitGameObject;
+
+        public string SpellId => _spellData != null ? _spellData.Id : null;
 
         public bool Enabled {
             get
@@ -23,11 +25,9 @@ namespace IT.WizardBattle.Game
 
         [SerializeField] private Transform _visualsContainer;
 
-        private IDamageAction _damageAction;
-        private GameObject _spellVisuals;
-        private string _spellId;
-        private float _speed;
+        private SpellData _spellData;
 
+        private GameObject _spellVisuals;
         private Rigidbody2D _rigidbody;
         private CircleCollider2D _circleCollider;
         private bool _isShooting;
@@ -40,9 +40,8 @@ namespace IT.WizardBattle.Game
 
         public void SetupSpell(SpellData spellData)
         {
-            _spellId = spellData.Id;
-            _damageAction = spellData.DamageAction;
-            _speed = spellData.Speed;
+            //TODO: Maybe, store the whole data here?
+            _spellData = spellData;
 
             _circleCollider.radius = spellData.Radius;
 
@@ -68,6 +67,7 @@ namespace IT.WizardBattle.Game
 
         public void Deinitialize()
         {
+            OnHitGameObject = null;
             Destroy(gameObject);
         }
 
@@ -78,14 +78,15 @@ namespace IT.WizardBattle.Game
             if (!_isShooting)
                 return;
 
-            _rigidbody.MovePosition(_rigidbody.position + _speed * Time.deltaTime * (Vector2)transform.up);
+            _rigidbody.MovePosition(_rigidbody.position + _spellData.Speed * Time.deltaTime * (Vector2)transform.up);
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            //TODO: make normal
             _isShooting = false;
             Enabled = false;
+            Vector2 collisionPoint = collision.contactCount > 0 ? collision.contacts[0].point : collision.otherRigidbody.position;
+            OnHitGameObject?.Invoke(_spellData, collision.gameObject, collisionPoint);
         }
     }
 }

@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using UnityEngine;
-
+﻿
 namespace IT.WizardBattle.Interfaces
 {
-    public interface ICharacterInstance 
+    public interface IDamagable 
     {
         public void ReceiveDamage(float damage);
     }

@@ -7,7 +7,7 @@ namespace IT.WizardBattle.Game
     [CreateAssetMenu(fileName = "SimpleDamageAction", menuName = "Wizard Battle/Damage Actions/Simple damage action")]
     public class SimpleDamageAction : DamageActionBase
     {
-        public override bool PerformDamage(ICharacterInstance character, float damage)
+        public override bool PerformDamage(IDamagable character, float damage)
         {
             character.ReceiveDamage(damage);
             return true;

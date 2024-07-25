@@ -23,6 +23,7 @@ namespace IT.WizardBattle.Application
             AddService<PlayerService>(_playerServicePrefab.gameObject);
             AddService<CameraService>();
             AddService<PlayerCastSpellsService>(_playerCastSpellsServicePrefab.gameObject);
+            AddService<DamageService>();
 
             _enemySpawnerService = AddService<EnemySpawnerService>(_enemySpawnerServicePrefab.gameObject);
         }

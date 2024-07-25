@@ -3,6 +3,7 @@ using UnityEngine;
 using IT.CoreLib.Interfaces;
 using IT.WizardBattle.Data;
 using IT.WizardBattle.Interfaces;
+using IT.Game.Services;
 
 
 namespace IT.WizardBattle.Services
@@ -12,6 +13,8 @@ namespace IT.WizardBattle.Services
         [SerializeField] private GameObject _playerPrefab;
 
         public event Action<SpellData> OnSpellSelected;
+        public event Action<float> OnPlayerHealthChanged;
+        public event Action OnPlayerDied;
 
         public ICharacterData PlayerData => _playerData;
         public SpellData[] AvailableSpells => _playerData.AvailableSpells.ToArray();
@@ -91,7 +94,18 @@ namespace IT.WizardBattle.Services
             OnSpellSelected?.Invoke(_selectedSpell);
         }
 
+        public void AddDamage(float damage)
+        {
+            _playerData.Health = SimpleDamageCalculator.CalculateHealth(_playerData.Health, damage, _playerData.Defense);
+            OnPlayerHealthChanged?.Invoke(_playerData.Health);
 
+            if (_playerData.Health == 0.0f) {
+                //TODO: do in normal
+                _player.Die();
+                DestroyPlayer();
+                OnPlayerDied?.Invoke();
+            }
+        }
 
         private void DestroyPlayer()
         {

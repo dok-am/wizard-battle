@@ -3,7 +3,6 @@ using IT.WizardBattle.Data;
 using IT.WizardBattle.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace IT.WizardBattle.Services
@@ -15,6 +14,7 @@ namespace IT.WizardBattle.Services
 
         private PlayerService _playerService;
         private PlayerInputService _playerInputService;
+        private DamageService _damageService;
 
         private List<ISpellInstance> _spellsPool = new();
         
@@ -27,6 +27,7 @@ namespace IT.WizardBattle.Services
         {
             _playerInputService = bootstrap.GetService<PlayerInputService>();
             _playerService = bootstrap.GetService<PlayerService>();
+            _damageService = bootstrap.GetService<DamageService>();
 
             _playerInputService.OnShootPressed += OnShootPressed;
         }
@@ -86,6 +87,8 @@ namespace IT.WizardBattle.Services
                 throw new Exception("[SPELL] Can't instantiate spell: prefab is wrong!");
 
             _spellsPool.Add(instance);
+
+            instance.OnHitGameObject += _damageService.OnSpellHitGameObject;
 
             return instance;
         }

@@ -3,7 +3,7 @@ using IT.WizardBattle.Data;
 
 namespace IT.WizardBattle.Services
 {
-    public class EnemyDataStorage : StorageServiceBase<EnemyData>
+    public class EnemyDataStorage : StorageServiceBase<EnemyStaticData>
     {
 
         public EnemyDataStorage() 

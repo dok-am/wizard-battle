@@ -1,33 +1,28 @@
-﻿using IT.CoreLib.Interfaces;
-using IT.WizardBattle.Interfaces;
-using System.Collections;
-using UnityEngine;
+﻿
 
 namespace IT.WizardBattle.Data
 {
-    [CreateAssetMenu(fileName = "Enemy", menuName = "Wizard Battle/Enemy")]
-    public class EnemyData : ScriptableObject, ICharacterData, IStaticModel
+    public class EnemyData 
     {
-        public string Id => _typeId;
-        public float Health => _health;
-        public float Defense => _defense;
-        public float Speed => _speed;
-        public float RotationSpeed => _rotationSpeed;
-        public float MeleeDamage => _meleeDamage;
-
-        public GameObject EnemyPrefab => _enemyPrefab;
-
+        public EnemyStaticData EnemyStaticData { get; private set; }
         
+        public float Health { 
+            get
+            {
+                return _health;
+            }
+            set
+            {
+                _health = value < 0.0f ? 0.0f : value;
+            }
+        }
 
-        [Header("Data")]
-        [SerializeField] private string _typeId;
-        [SerializeField] private float _health;
-        [SerializeField, Range(0.0f, 1.0f)] private float _defense;
-        [SerializeField] private float _speed;
-        [SerializeField] private float _rotationSpeed;
-        [SerializeField] private float _meleeDamage;
+        private float _health;
 
-        [Header("Prefab")]
-        [SerializeField] private GameObject _enemyPrefab;
+        public EnemyData(EnemyStaticData enemyStaticData)
+        {
+            EnemyStaticData = enemyStaticData;
+            _health = enemyStaticData.Health;
+        }
     }
 }

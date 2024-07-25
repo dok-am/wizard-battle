@@ -14,7 +14,7 @@ namespace IT.WizardBattle.Services
         [SerializeField] private int _maximalEnemiesCount = 10;
 
         private Vector2[] _spawnPoints;
-        private EnemyData[] _enemiesData;
+        private EnemyStaticData[] _enemiesData;
         private EnemyAIService _enemyAIService;
 
         private bool _isSpawning;
@@ -63,7 +63,7 @@ namespace IT.WizardBattle.Services
             if (!IsEnemyAvailable())
                 return;
 
-            EnemyData enemyData = GetRandomItem(_enemiesData);
+            EnemyStaticData enemyData = GetRandomItem(_enemiesData);
 
             IEnemyInstance instance = GetEnemyFromPool(enemyData.Id);
             if (instance == null) 

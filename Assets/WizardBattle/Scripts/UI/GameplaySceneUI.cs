@@ -19,19 +19,28 @@ namespace IT.WizardBattle.UI
 
             _playerService = scene.GetService<PlayerService>();
             _playerService.OnSpellSelected += OnSpellSelected;
+            _playerService.OnPlayerHealthChanged += OnPlayerHealthChanged;
 
             OnSpellSelected(_playerService.SelectedSpell);
         }
+
+        
 
         public override void Deinitialize()
         {
             base.Deinitialize();
             _playerService.OnSpellSelected -= OnSpellSelected;
+            _playerService.OnPlayerHealthChanged -= OnPlayerHealthChanged;
         }
 
         private void OnSpellSelected(SpellData spell)
         {
            _spells.SelectSpell(spell);
+        }
+
+        private void OnPlayerHealthChanged(float health)
+        {
+            _healthbar.SetHealthAmount(health);
         }
     }
 }

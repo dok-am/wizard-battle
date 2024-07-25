@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace IT.WizardBattle.Interfaces
 {
-    public interface IPlayerInstance : ICharacterInstance
+    public interface IPlayerInstance : IDamagable
     {
         public GameObject GameObject { get; }
 
@@ -12,6 +12,8 @@ namespace IT.WizardBattle.Interfaces
         public void Deinitialize();
 
         public Transform ShootingPoint { get; }
+
+        public void Die();
 
     }
 }

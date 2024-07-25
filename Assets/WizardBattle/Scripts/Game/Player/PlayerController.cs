@@ -47,9 +47,13 @@ namespace IT.WizardBattle.Game.Player
 
         public void ReceiveDamage(float damage)
         {
-            throw new System.NotImplementedException();
+            _playerService.AddDamage(damage);
         }
 
+        public void Die()
+        {
+            
+        }
 
 
         private void OnNextSpellPressed()
