@@ -12,15 +12,17 @@ namespace IT.WizardBattle.Services
     {
         [SerializeField] private GameObject _playerPrefab;
 
+        public delegate void PlayerHealthChangedHandler(float health, float maxHealth);
+
         public event Action<SpellData> OnSpellSelected;
-        public event Action<float> OnPlayerHealthChanged;
+        public event PlayerHealthChangedHandler OnPlayerHealthChanged;
         public event Action OnPlayerDied;
 
         public ICharacterData PlayerData => _playerData;
         public SpellData[] AvailableSpells => _playerData.AvailableSpells.ToArray();
         public SpellData SelectedSpell => _selectedSpell;
-        public Transform PlayerShootingPoint => _player.ShootingPoint;
-        public Transform PlayerTransform => _player.GameObject.transform;
+        public Transform PlayerShootingPoint => _player != null ? _player.ShootingPoint : null;
+        public Transform PlayerTransform => _player != null ? _player.GameObject.transform : null;
 
 
         private PlayerData _playerData;
@@ -97,7 +99,7 @@ namespace IT.WizardBattle.Services
         public void AddDamage(float damage)
         {
             _playerData.Health = SimpleDamageCalculator.CalculateHealth(_playerData.Health, damage, _playerData.Defense);
-            OnPlayerHealthChanged?.Invoke(_playerData.Health);
+            OnPlayerHealthChanged?.Invoke(_playerData.Health, _playerData.MaxHealth);
 
             if (_playerData.Health == 0.0f) {
                 //TODO: do in normal
@@ -122,6 +124,7 @@ namespace IT.WizardBattle.Services
             _playerData = new PlayerData()
             {
                 Health = 100.0f,
+                MaxHealth = 100.0f,
                 Defense = 1.0f,
                 MeleeDamage = 0.0f,
                 Speed = 5.0f,

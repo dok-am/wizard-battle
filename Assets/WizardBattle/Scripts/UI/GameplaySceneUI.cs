@@ -38,9 +38,9 @@ namespace IT.WizardBattle.UI
            _spells.SelectSpell(spell);
         }
 
-        private void OnPlayerHealthChanged(float health)
+        private void OnPlayerHealthChanged(float health, float maxHealth)
         {
-            _healthbar.SetHealthAmount(health);
+            _healthbar.SetHealthAmount(health/maxHealth);
         }
     }
 }

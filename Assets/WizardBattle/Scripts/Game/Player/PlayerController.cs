@@ -38,6 +38,7 @@ namespace IT.WizardBattle.Game.Player
         {
             _playerInputService.OnNextSpellPressed -= OnNextSpellPressed;
             _playerInputService.OnPreviousSpellPressed -= OnPreviousSpellPressed;
+            gameObject.SetActive(false);
         }
 
         public void UpdateData(ICharacterData characterData)

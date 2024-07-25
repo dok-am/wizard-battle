@@ -1,5 +1,7 @@
 ﻿
 
+using UnityEngine;
+
 namespace IT.WizardBattle.Data
 {
     public class EnemyData 
@@ -13,7 +15,7 @@ namespace IT.WizardBattle.Data
             }
             set
             {
-                _health = value < 0.0f ? 0.0f : value;
+                _health = Mathf.Clamp(value, 0.0f, EnemyStaticData.MaxHealth);
             }
         }
 
@@ -22,7 +24,7 @@ namespace IT.WizardBattle.Data
         public EnemyData(EnemyStaticData enemyStaticData)
         {
             EnemyStaticData = enemyStaticData;
-            _health = enemyStaticData.Health;
+            _health = enemyStaticData.MaxHealth;
         }
     }
 }

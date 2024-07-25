@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Ghost
   m_EditorClassIdentifier: 
   _typeId: ghost
-  _health: 25
+  _maxHealth: 0
   _defense: 1
   _speed: 10
   _rotationSpeed: 100
   _meleeDamage: 5
+  _attackCooldown: 2
   _enemyPrefab: {fileID: 2411760788788138201, guid: 65032a03f917f1449821be7c2c3ed1f7, type: 3}

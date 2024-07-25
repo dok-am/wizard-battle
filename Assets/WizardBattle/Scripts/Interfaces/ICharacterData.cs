@@ -4,7 +4,7 @@ namespace IT.WizardBattle.Interfaces
 {
     public interface ICharacterData 
     {
-        public float Health { get;}
+        public float MaxHealth { get; }
 
         /// <summary>
         /// From 0 to 1, where

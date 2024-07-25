@@ -1,5 +1,6 @@
 ﻿using IT.Game.Services;
 using IT.WizardBattle.Data;
+using IT.WizardBattle.Game.Battle;
 using IT.WizardBattle.Interfaces;
 using System;
 using UnityEngine;
@@ -32,9 +33,9 @@ namespace IT.WizardBattle.Game
         [SerializeField] private Transform _visualContainer;
 
         private CharacterMoveController _moveController;
-
         private EnemyData _enemyData;
         private GameObject _visual;
+        private MeleeEnemyAttack _meleeAttack;
 
         private void Awake()
         {
@@ -45,6 +46,7 @@ namespace IT.WizardBattle.Game
         {
             _enemyData = new EnemyData(characterData);
             _moveController.SetSpeed(characterData.Speed, characterData.RotationSpeed);
+            _meleeAttack = new MeleeEnemyAttack(characterData.AttackCooldown, characterData.MeleeDamage);
 
             ResetVisual();
 
@@ -86,6 +88,24 @@ namespace IT.WizardBattle.Game
                 Destroy(_visual);
         }
 
-        
+        private void Update()
+        {
+            if (_meleeAttack != null)
+                _meleeAttack.Update(Time.deltaTime);
+        }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (_meleeAttack == null)
+                return;
+
+            IPlayerInstance player = collision.gameObject.GetComponent<IPlayerInstance>();
+            if (player == null)
+                return;
+
+            _meleeAttack.TouchPlayer(player);
+        }
+
+
     }
 }

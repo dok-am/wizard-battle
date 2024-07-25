@@ -44,6 +44,9 @@ namespace IT.WizardBattle.Services
 
         private void MoveAndRotateTowardsPlayer(CharacterMoveController moveController, float dt)
         {
+            if (_playerTransform == null)
+                return;
+
             moveController.RotateToward(_playerTransform.position, dt);
             moveController.Move(1.0f, dt);
         }

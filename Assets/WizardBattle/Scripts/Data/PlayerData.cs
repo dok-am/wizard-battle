@@ -8,6 +8,7 @@ namespace IT.WizardBattle.Data
         public string TypeId => "Player";
 
         public float Health { get; set; }
+        public float MaxHealth { get; set; }
 
         public float Defense { get; set; }
 
