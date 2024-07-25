@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Icicle
   m_EditorClassIdentifier: 
   _id: icicle
-  _damage: 20
+  _damage: 10
   _damageAction: {fileID: 11400000, guid: 5f38f09cc00be4b4aa568c8be5c84daf, type: 2}
-  _speed: 0
-  _radius: 0
+  _speed: 100
+  _radius: 0.2
   _icon: {fileID: -3034759746691774636, guid: 9f80c2fb138cf1649b20e1867c4f8fbb, type: 3}
   _iconTint: {r: 0.216981, g: 0.90906173, b: 1, a: 1}
-  _projectileVisual: {fileID: 0}
+  _projectileVisual: {fileID: 6768352452597360543, guid: 257ea9e92d559ac4ea6d2a6b46ef1791, type: 3}
+  _hitVFX: {fileID: 6427576802273942322, guid: ab5b7ad918384cd47b4479d6e3b6037e, type: 3}
