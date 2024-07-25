@@ -15,6 +15,7 @@ namespace IT.WizardBattle.Services
         private PlayerService _playerService;
         private PlayerInputService _playerInputService;
         private DamageService _damageService;
+        private VFXService _VFXService;
 
         private List<ISpellInstance> _spellsPool = new();
         
@@ -28,6 +29,7 @@ namespace IT.WizardBattle.Services
             _playerInputService = bootstrap.GetService<PlayerInputService>();
             _playerService = bootstrap.GetService<PlayerService>();
             _damageService = bootstrap.GetService<DamageService>();
+            _VFXService = bootstrap.GetService<VFXService>();
 
             _playerInputService.OnShootPressed += OnShootPressed;
         }
@@ -88,9 +90,15 @@ namespace IT.WizardBattle.Services
 
             _spellsPool.Add(instance);
 
-            instance.OnHitGameObject += _damageService.OnSpellHitGameObject;
+            instance.OnHitGameObject += OnSpellHitGameObject;
 
             return instance;
+        }
+
+        private void OnSpellHitGameObject(SpellData spell, GameObject hitObject, Vector2 hitPosition)
+        {
+            _VFXService.PlayVisualEffect(spell.HitVFX, hitPosition);
+            _damageService.OnSpellHitGameObject(spell, hitObject, hitPosition);
         }
                 
     }

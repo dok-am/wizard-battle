@@ -5,10 +5,13 @@ using UnityEngine;
 
 namespace IT.WizardBattle.Interfaces
 {
+
+    public delegate void EnemyHealthChangeHandler(IEnemyInstance enemy, float health, float maxHealth);
+
     public interface IEnemyInstance : IDamagable
     {
         public event Action<IEnemyInstance> OnEnemyReadyToDie;
-        public event Action<IEnemyInstance, float> OnEnemyHealthChanged;
+        public event EnemyHealthChangeHandler OnEnemyHealthChanged;
 
         public GameObject GameObject { get; }
 

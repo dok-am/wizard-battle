@@ -24,6 +24,7 @@ namespace IT.WizardBattle.Application
             AddService<CameraService>();
             AddService<PlayerCastSpellsService>(_playerCastSpellsServicePrefab.gameObject);
             AddService<DamageService>();
+            AddService<VFXService>();
 
             _enemySpawnerService = AddService<EnemySpawnerService>(_enemySpawnerServicePrefab.gameObject);
         }

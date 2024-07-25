@@ -1,4 +1,5 @@
 using IT.CoreLib.Interfaces;
+using IT.WizardBattle.Game;
 using IT.WizardBattle.Interfaces;
 using UnityEngine;
 
@@ -16,6 +17,7 @@ namespace IT.WizardBattle.Data
         public Sprite Icon => _icon;
         public Color IconTint => _iconTint;
         public GameObject ProjectileVisual => _projectileVisual;
+        public VFX HitVFX => _hitVFX;
 
         [Header("Data")]
         [SerializeField] private string _id;
@@ -28,5 +30,6 @@ namespace IT.WizardBattle.Data
         [SerializeField] private Sprite _icon;
         [SerializeField] private Color _iconTint = Color.white;
         [SerializeField] private GameObject _projectileVisual;
+        [SerializeField] private VFX _hitVFX;
     }
 }

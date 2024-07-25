@@ -12,7 +12,7 @@ namespace IT.WizardBattle.Game
     public class EnemyController : MonoBehaviour, IEnemyInstance
     {
         public event Action<IEnemyInstance> OnEnemyReadyToDie;
-        public event Action<IEnemyInstance, float> OnEnemyHealthChanged;
+        public event EnemyHealthChangeHandler OnEnemyHealthChanged;
 
         public GameObject GameObject => gameObject;
         public string TypeId => _enemyData != null ? _enemyData.EnemyStaticData.Id : null;
@@ -73,6 +73,7 @@ namespace IT.WizardBattle.Game
         {
             _enemyData.Health = SimpleDamageCalculator.CalculateHealth(_enemyData.Health, damage, _enemyData.EnemyStaticData.Defense);
             _characterDamageEffect.PlayDamageEffect();
+            OnEnemyHealthChanged?.Invoke(this, _enemyData.Health, _enemyData.EnemyStaticData.MaxHealth);
             
             if (_enemyData.Health == 0.0f)
             {

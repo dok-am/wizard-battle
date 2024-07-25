@@ -20,3 +20,4 @@ MonoBehaviour:
   _icon: {fileID: -3672923369707170902, guid: 2d58ce2b369c382418bcf4cd07d5bc37, type: 3}
   _iconTint: {r: 1, g: 0.216981, b: 0.216981, a: 1}
   _projectileVisual: {fileID: 6768352452597360543, guid: b361b163ede43254b8e8aa2e15f69992, type: 3}
+  _hitVFX: {fileID: 6427576802273942322, guid: 679fa000f0979f64e8f36ec0cd993821, type: 3}

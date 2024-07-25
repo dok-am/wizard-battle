@@ -8,7 +8,7 @@ namespace IT.WizardBattle.Game
     [RequireComponent(typeof(Rigidbody2D))]
     public class SpellInstance : MonoBehaviour, ISpellInstance
     {
-        public event Action<SpellData, GameObject, Vector2> OnHitGameObject;
+        public event SpellHitHandler OnHitGameObject;
 
         public string SpellId => _spellData != null ? _spellData.Id : null;
 
@@ -31,6 +31,7 @@ namespace IT.WizardBattle.Game
         private Rigidbody2D _rigidbody;
         private CircleCollider2D _circleCollider;
         private bool _isShooting;
+               
 
         private void Awake()
         {
