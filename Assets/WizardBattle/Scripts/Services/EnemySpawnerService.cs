@@ -1,5 +1,6 @@
 ﻿using IT.CoreLib.Interfaces;
 using IT.WizardBattle.Data;
+using IT.WizardBattle.Game;
 using IT.WizardBattle.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace IT.WizardBattle.Services
         private Vector2[] _spawnPoints;
         private EnemyStaticData[] _enemiesData;
         private EnemyAIService _enemyAIService;
+        private CameraService _cameraService;
 
         private bool _isSpawning;
         private float _spawnTimer;
@@ -31,6 +33,7 @@ namespace IT.WizardBattle.Services
             _spawnPoints = bootstrap.GetService<SpawnPointsService>().EnemiesSpawnPoints;
             _enemiesData = bootstrap.GetService<EnemyDataStorage>().GetAllModels();
             _enemyAIService = bootstrap.GetService<EnemyAIService>();
+            _cameraService = bootstrap.GetService<CameraService>();
         }
 
         public void Destroy()
@@ -72,7 +75,7 @@ namespace IT.WizardBattle.Services
             }
 
             instance.SetupEnemy(enemyData);
-            instance.Spawn(GetRandomItem(_spawnPoints));
+            instance.Spawn(GetRandomSpawnPointOutOfView());
             _enemyAIService.AddEnemy(instance.MoveController);
         }
 
@@ -118,6 +121,16 @@ namespace IT.WizardBattle.Services
             _enemiesPool.Add(instance);
 
             return instance;
+        }
+
+        private Vector2 GetRandomSpawnPointOutOfView()
+        {
+            Vector2 spawnPoint = GetRandomItem(_spawnPoints);
+
+            if (_cameraService.IsPointVisible(spawnPoint))
+                return GetRandomItem(_spawnPoints);
+
+            return spawnPoint;
         }
 
         private T GetRandomItem<T>(T[] array)

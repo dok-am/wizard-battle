@@ -19,15 +19,9 @@ namespace IT.WizardBattle.Services
             _cameraPozitionZ = _camera.transform.position.z;
         }
 
-        public void OnInitialized(IBootstrap bootstrap)
-        {
-            
-        }
+        public void OnInitialized(IBootstrap bootstrap) { }
 
-        public void Destroy()
-        {
-            
-        }
+        public void Destroy() { }
 
         public void SetTarget(Transform target)
         {
@@ -43,6 +37,12 @@ namespace IT.WizardBattle.Services
             plainPosition.z = _cameraPozitionZ;
 
             _camera.transform.position = Vector3.Lerp(_camera.transform.position, plainPosition, dt * CAMERA_SMOOTH_SPEED);
+        }
+
+        public bool IsPointVisible(Vector2 point)
+        {
+            Vector3 viewportPoint = _camera.WorldToViewportPoint(point);
+            return new Rect(0, 0, 1, 1).Contains(viewportPoint);
         }
     }
 }
