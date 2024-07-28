@@ -102,7 +102,6 @@ namespace IT.WizardBattle.Services
             OnPlayerHealthChanged?.Invoke(_playerData.Health, _playerData.MaxHealth);
 
             if (_playerData.Health == 0.0f) {
-                //TODO: do in normal
                 _player.Die();
                 OnPlayerDied?.Invoke();
             }

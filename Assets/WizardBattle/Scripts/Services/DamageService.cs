@@ -28,8 +28,6 @@ namespace IT.WizardBattle.Services
 
         public void OnSpellHitGameObject(SpellData spell, GameObject gameObject, Vector2 position)
         {
-            //TODO: Run some VFX here
-
             IDamagable damagable = gameObject.GetComponent<IDamagable>();
             if (damagable == null)
                 return;

@@ -41,7 +41,6 @@ namespace IT.WizardBattle.Game
 
         public void SetupSpell(SpellData spellData)
         {
-            //TODO: Maybe, store the whole data here?
             _spellData = spellData;
 
             _circleCollider.radius = spellData.Radius;

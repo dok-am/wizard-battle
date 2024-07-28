@@ -70,13 +70,5 @@ namespace IT.WizardBattle.UI
             _fillBar.fillAmount = value;
         }
 
-        //TODO: Remove this test method
-        private void OnGUI()
-        {
-            if (GUI.Button(new Rect(10, 70, 50, 30), "Debug helath bar"))
-            {
-                SetHealthAmount(_fillBar.fillAmount - 0.1f);
-            }
-        }
     }
 }
