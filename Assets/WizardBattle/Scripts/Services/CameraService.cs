@@ -19,10 +19,6 @@ namespace IT.WizardBattle.Services
             _cameraPozitionZ = _camera.transform.position.z;
         }
 
-        public void OnInitialized(IBootstrap bootstrap) { }
-
-        public void Destroy() { }
-
         public void SetTarget(Transform target)
         {
             _targetToFollow = target;

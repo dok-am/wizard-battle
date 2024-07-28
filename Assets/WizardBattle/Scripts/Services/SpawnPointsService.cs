@@ -1,9 +1,7 @@
 using IT.CoreLib.Interfaces;
 using IT.CoreLib.Tools;
 using IT.WizardBattle.Game;
-using NUnit.Framework;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace IT.WizardBattle.Services
@@ -39,16 +37,6 @@ namespace IT.WizardBattle.Services
 
             if (_playerSpawnPoint == null)
                 CLDebug.Log("No player spawn point on scene!", "SPAWN", "red");
-        }
-
-        public void OnInitialized(IBootstrap bootstrap)
-        {
-            
-        }
-
-        public void Destroy()
-        {
-            
         }
     }
 }

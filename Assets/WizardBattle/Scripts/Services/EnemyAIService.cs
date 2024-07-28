@@ -7,17 +7,11 @@ namespace IT.WizardBattle.Services
 {
     public class EnemyAIService : IService, IUpdatable
     {
-        
-        private List<CharacterMoveController> _enemies = new();
-
-        private PlayerService _playerService;
-
         private Transform _playerTransform => _playerService.PlayerTransform;
 
-        public void Initialize()
-        {
-            
-        }
+        private List<CharacterMoveController> _enemies = new();
+        private PlayerService _playerService;
+        
 
         public void OnInitialized(IBootstrap bootstrap)
         {
@@ -41,6 +35,7 @@ namespace IT.WizardBattle.Services
                 MoveAndRotateTowardsPlayer(moveController, dt);
             }
         }
+
 
         private void MoveAndRotateTowardsPlayer(CharacterMoveController moveController, float dt)
         {

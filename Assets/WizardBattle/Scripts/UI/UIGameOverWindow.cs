@@ -17,6 +17,8 @@ namespace IT.WizardBattle
             _restartButton.onClick.AddListener(OnRestartClicked);
         }
 
+
+
         private void OnRestartClicked()
         {
             _restartButton.enabled = false;

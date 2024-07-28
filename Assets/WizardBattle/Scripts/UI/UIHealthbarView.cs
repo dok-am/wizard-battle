@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +12,8 @@ namespace IT.WizardBattle.UI
         private float _targetHealth = 1.0f;
 
         private Coroutine _animationCoroutine;
+
+
 
         /// <summary>
         /// Set health amount
@@ -42,6 +43,8 @@ namespace IT.WizardBattle.UI
             _animationCoroutine = StartCoroutine(FillHealthAnimated());
             
         }
+
+
 
         private IEnumerator FillHealthAnimated()
         {

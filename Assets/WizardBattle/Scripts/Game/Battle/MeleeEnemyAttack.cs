@@ -1,7 +1,5 @@
 ﻿using IT.CoreLib.Interfaces;
-using IT.WizardBattle.Data;
 using IT.WizardBattle.Interfaces;
-using UnityEngine;
 
 namespace IT.WizardBattle.Game.Battle
 {

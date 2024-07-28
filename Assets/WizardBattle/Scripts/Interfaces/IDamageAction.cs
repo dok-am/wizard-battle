@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-
+﻿
 namespace IT.WizardBattle.Interfaces
 {
     public interface IDamageAction 

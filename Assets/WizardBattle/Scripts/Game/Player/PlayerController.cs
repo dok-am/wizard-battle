@@ -62,6 +62,7 @@ namespace IT.WizardBattle.Game.Player
         }
 
 
+
         private void OnNextSpellPressed()
         {
             _playerService.SelectNextSpell();

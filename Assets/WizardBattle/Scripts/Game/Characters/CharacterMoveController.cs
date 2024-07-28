@@ -59,6 +59,8 @@ namespace IT.WizardBattle.Game
             _rigidbody.MoveRotation(_rigidbody.rotation + angle * _rotationSpeed * deltaTime);
         }
 
+
+
         private void Update()
         {
             if (_animator != null) 

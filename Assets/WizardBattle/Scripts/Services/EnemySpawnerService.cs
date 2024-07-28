@@ -36,11 +36,6 @@ namespace IT.WizardBattle.Services
             _cameraService = bootstrap.GetService<CameraService>();
         }
 
-        public void Destroy()
-        {
-            
-        }
-
         public void StartSpawning()
         {
             _isSpawning = true;

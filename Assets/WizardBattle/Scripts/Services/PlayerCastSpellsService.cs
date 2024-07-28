@@ -18,11 +18,8 @@ namespace IT.WizardBattle.Services
         private VFXService _VFXService;
 
         private List<ISpellInstance> _spellsPool = new();
-        
-        public void Initialize()
-        {
-            
-        }
+
+
 
         public void OnInitialized(IBootstrap bootstrap)
         {

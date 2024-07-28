@@ -1,6 +1,5 @@
 ﻿using IT.CoreLib.Interfaces;
 using IT.WizardBattle.Interfaces;
-using System.Collections;
 using UnityEngine;
 
 namespace IT.WizardBattle.Data
@@ -17,7 +16,6 @@ namespace IT.WizardBattle.Data
         public float AttackCooldown => _attackCooldown;
         public GameObject EnemyPrefab => _enemyPrefab;
 
-        
 
         [Header("Data")]
         [SerializeField] private string _typeId;

@@ -38,6 +38,8 @@ namespace IT.WizardBattle.Assets.WizardBattle.Scripts.Game.Characters
             StopAllCoroutines();
         }
 
+
+
         private IEnumerator Blinking()
         {
             float blinkDuration = 1.0f / EFFECT_BLINKING_FREQUENCY;

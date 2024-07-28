@@ -1,5 +1,4 @@
 ﻿using IT.WizardBattle.Data;
-using System;
 using UnityEngine;
 
 namespace IT.WizardBattle.Interfaces

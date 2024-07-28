@@ -1,6 +1,5 @@
 ﻿using IT.CoreLib.Interfaces;
 using IT.WizardBattle.Game;
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,12 +14,13 @@ namespace IT.WizardBattle.Services
 
         private const int MAX_EFFECTS_COUNT = 20;
 
-        public void Initialize() { }
+
+
         public void OnInitialized(IBootstrap bootstrap) 
         {
             _vfxContainer = new GameObject("VFX_POOL").transform;
         }
-        public void Destroy() { }
+
 
 
         public void PlayVisualEffect(VFX effectPrefab, Vector2 position)
@@ -33,6 +33,8 @@ namespace IT.WizardBattle.Services
 
             instance.Play(position);
         }
+
+
 
         private VFX TryGetEffectFromPool(string effectId)
         {

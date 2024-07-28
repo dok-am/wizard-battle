@@ -115,6 +115,5 @@ namespace IT.WizardBattle.Game
             _meleeAttack.TouchPlayer(player);
         }
 
-
     }
 }

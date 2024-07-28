@@ -1,5 +1,4 @@
 ﻿
-
 namespace IT.WizardBattle.Interfaces
 {
     public interface ICharacterData 

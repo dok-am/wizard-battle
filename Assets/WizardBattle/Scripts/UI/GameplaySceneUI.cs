@@ -33,6 +33,8 @@ namespace IT.WizardBattle.UI
             _playerService.OnPlayerHealthChanged -= OnPlayerHealthChanged;
         }
 
+
+
         private void OnSpellSelected(SpellData spell)
         {
            _spells.SelectSpell(spell);

@@ -35,11 +35,6 @@ namespace IT.WizardBattle.Services
 
 
 
-        public void Initialize()
-        {
-            
-        }
-
         public void OnInitialized(IBootstrap bootstrap)
         {
             LoadPlayerData(bootstrap.GetService<SpellDataStorage>());
@@ -106,6 +101,8 @@ namespace IT.WizardBattle.Services
                 OnPlayerDied?.Invoke();
             }
         }
+
+
 
         private void DestroyPlayer()
         {

@@ -36,11 +36,6 @@ namespace IT.WizardBattle.Services
             _previousSpellAction.started += PreviousSpellPressed;
         }
 
-        public void OnInitialized(IBootstrap bootstrap)
-        {
-
-        }
-
         public void OnPaused(bool paused)
         {
             _isPaused = paused;
@@ -65,6 +60,8 @@ namespace IT.WizardBattle.Services
             MoveValue = _moveAction.IsPressed() ? _moveAction.ReadValue<float>() : 0.0f;
             RotateValue = _rotateAction.IsPressed() ? _rotateAction.ReadValue<float>() : 0.0f;
         }
+
+
 
         private void ShootPressed(InputAction.CallbackContext context)
         {
