@@ -21,6 +21,12 @@ namespace IT.WizardBattle.Assets.WizardBattle.Scripts.Game.Characters
             _originalColor = _sprite.color;
         }
 
+        public void UpdateSpriteForced(GameObject visualObject)
+        {
+            _sprite = visualObject.GetComponent<SpriteRenderer>();
+            _originalColor = _sprite.color;
+        }
+
         public void PlayDamageEffect()
         {
             StopAllCoroutines();

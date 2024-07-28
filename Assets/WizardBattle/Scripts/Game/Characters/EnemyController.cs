@@ -55,7 +55,7 @@ namespace IT.WizardBattle.Game
             ResetVisual();
 
             _visual = Instantiate(characterData.EnemyPrefab, _visualContainer);
-            _characterDamageEffect.Initialize();
+            _characterDamageEffect.UpdateSpriteForced(_visual);
         }
 
         public void Deinitialize()
