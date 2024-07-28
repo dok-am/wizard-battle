@@ -15,8 +15,9 @@ MonoBehaviour:
   _id: lightning
   _damage: 30
   _damageAction: {fileID: 11400000, guid: 5f38f09cc00be4b4aa568c8be5c84daf, type: 2}
-  _speed: 0
-  _radius: 0
+  _speed: 150
+  _radius: 0.15
   _icon: {fileID: 7779550629027557947, guid: ccded7efdfa54034395949d15fda0767, type: 3}
   _iconTint: {r: 1, g: 0.9136039, b: 0.3150943, a: 1}
-  _projectileVisual: {fileID: 0}
+  _projectileVisual: {fileID: 6768352452597360543, guid: b5f82007101efaf47a14f8ba73395961, type: 3}
+  _hitVFX: {fileID: 6427576802273942322, guid: 6e34a50b4ff2e2648a49f9ae78adf898, type: 3}
