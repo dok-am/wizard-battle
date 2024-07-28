@@ -12,6 +12,7 @@ namespace IT.WizardBattle.Application
         [SerializeField] private EnemySpawnerService _enemySpawnerServicePrefab;
 
         private EnemySpawnerService _enemySpawnerService;
+        private PlayerService _playerService;
         
         protected override void InitializeServices()
         {
@@ -20,7 +21,7 @@ namespace IT.WizardBattle.Application
             AddService<EnemyDataStorage>();
             AddService<SpawnPointsService>();
             AddService<EnemyAIService>();
-            AddService<PlayerService>(_playerServicePrefab.gameObject);
+            _playerService = AddService<PlayerService>(_playerServicePrefab.gameObject);
             AddService<CameraService>();
             AddService<PlayerCastSpellsService>(_playerCastSpellsServicePrefab.gameObject);
             AddService<DamageService>();
@@ -32,6 +33,14 @@ namespace IT.WizardBattle.Application
         protected override void InitializeScene()
         {
             _enemySpawnerService.StartSpawning();
+            _playerService.OnPlayerDied += OnPlayerDied;
+
+        }
+
+        private void OnPlayerDied()
+        {
+            SetPaused(true);
+            SceneUI.ShowWindow<UIGameOverWindow>();
         }
     }
 }

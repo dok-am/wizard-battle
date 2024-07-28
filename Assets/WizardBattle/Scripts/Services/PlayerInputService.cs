@@ -20,6 +20,8 @@ namespace IT.WizardBattle.Services
         private InputAction _nextSpellAction;
         private InputAction _previousSpellAction;
 
+        private bool _isPaused;
+
 
         public void Initialize()
         {
@@ -39,6 +41,11 @@ namespace IT.WizardBattle.Services
 
         }
 
+        public void OnPaused(bool paused)
+        {
+            _isPaused = paused;
+        }
+
         public void Destroy()
         {
             _shootAction.started -= ShootPressed;
@@ -48,22 +55,38 @@ namespace IT.WizardBattle.Services
 
         public void Update(float dt)
         {
+            if (_isPaused)
+            {
+                MoveValue = 0.0f;
+                RotateValue = 0.0f;
+                return;
+            }
+
             MoveValue = _moveAction.IsPressed() ? _moveAction.ReadValue<float>() : 0.0f;
             RotateValue = _rotateAction.IsPressed() ? _rotateAction.ReadValue<float>() : 0.0f;
         }
 
         private void ShootPressed(InputAction.CallbackContext context)
         {
+            if (_isPaused)
+                return;
+
             OnShootPressed?.Invoke();
         }
 
         private void NextSpellPressed(InputAction.CallbackContext context)
         {
+            if (_isPaused)
+                return;
+
             OnNextSpellPressed?.Invoke();
         }
 
         private void PreviousSpellPressed(InputAction.CallbackContext context)
         {
+            if (_isPaused)
+                return;
+
             OnPreviousSpellPressed?.Invoke();
         }
     }

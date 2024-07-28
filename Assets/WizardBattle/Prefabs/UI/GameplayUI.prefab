@@ -125,7 +125,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba722f12b5035124d8f6cb8035f9d47e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _windowsPrefabs: []
+  _windowsPrefabs:
+  - {fileID: 7982968533839252378, guid: 8454ccfad82b30d4297529a87632e560, type: 3}
   _healthbar: {fileID: 700436089075662206}
   _spells: {fileID: 7752328253207857720}
 --- !u!1 &3082575301507633638
