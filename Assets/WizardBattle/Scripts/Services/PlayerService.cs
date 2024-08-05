@@ -96,7 +96,7 @@ namespace IT.WizardBattle.Services
             _playerData.Health = SimpleDamageCalculator.CalculateHealth(_playerData.Health, damage, _playerData.Defense);
             OnPlayerHealthChanged?.Invoke(_playerData.Health, _playerData.MaxHealth);
 
-            if (_playerData.Health == 0.0f) {
+            if (_playerData.Health <= 0.0f) {
                 _player.Die();
                 OnPlayerDied?.Invoke();
             }

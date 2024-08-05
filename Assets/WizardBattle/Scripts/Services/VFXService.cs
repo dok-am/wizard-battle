@@ -49,7 +49,7 @@ namespace IT.WizardBattle.Services
 
         private VFX AddEffectToPool(VFX effectPrefab)
         {
-            VFX instance = GameObject.Instantiate(effectPrefab, _vfxContainer).GetComponent<VFX>();
+            VFX instance = GameObject.Instantiate(effectPrefab, _vfxContainer);
 
             if (instance == null)
                 throw new Exception("[VFX] Can't spawn vfx: prefab is incorrect!");

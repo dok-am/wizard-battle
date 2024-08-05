@@ -75,7 +75,7 @@ namespace IT.WizardBattle.Game
             _characterDamageEffect.PlayDamageEffect();
             OnEnemyHealthChanged?.Invoke(this, _enemyData.Health, _enemyData.EnemyStaticData.MaxHealth);
             
-            if (_enemyData.Health == 0.0f)
+            if (_enemyData.Health <= 0.0f)
             {
                 OnEnemyReadyToDie?.Invoke(this);
                 Die();
