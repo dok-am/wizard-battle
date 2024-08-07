@@ -7,7 +7,7 @@ namespace IT.WizardBattle.Game
         public string Id => _id;
         public bool IsPlaying => _isPlaying;
 
-        public bool Enabled  {
+        public bool Available  {
             get 
             {
                 return gameObject != null && gameObject.activeSelf;
@@ -30,7 +30,7 @@ namespace IT.WizardBattle.Game
 
         public void Play(Vector2 position)
         {
-            Enabled = true;
+            Available = true;
             transform.position = position;
             _timer = 0;
             _particleSystem.Play();
@@ -42,7 +42,7 @@ namespace IT.WizardBattle.Game
             _timer = 0;
             _particleSystem.Stop();
             _isPlaying = false;
-            Enabled = false;
+            Available = false;
         }
 
 

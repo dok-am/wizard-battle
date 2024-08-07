@@ -8,6 +8,7 @@ namespace IT.WizardBattle.Services
 {
     public class VFXService : IService
     {
+
         private List<VFX> _effectsPool = new();
         private Transform _vfxContainer;
 
@@ -36,7 +37,7 @@ namespace IT.WizardBattle.Services
         {
             foreach (VFX effect in _effectsPool)
             {
-                if (effect.Id.Equals(effectId) && !effect.Enabled)
+                if (effect.Id.Equals(effectId) && !effect.Available)
                     return effect;
             }
 
