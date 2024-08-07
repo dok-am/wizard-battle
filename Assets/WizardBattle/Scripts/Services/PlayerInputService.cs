@@ -39,6 +39,11 @@ namespace IT.WizardBattle.Services
         public void OnPaused(bool paused)
         {
             _isPaused = paused;
+            if (paused)
+            {
+                MoveValue = 0.0f;
+                RotateValue = 0.0f;
+            }
         }
 
         public void Destroy()
@@ -50,13 +55,6 @@ namespace IT.WizardBattle.Services
 
         public void Update(float dt)
         {
-            if (_isPaused)
-            {
-                MoveValue = 0.0f;
-                RotateValue = 0.0f;
-                return;
-            }
-
             MoveValue = _moveAction.IsPressed() ? _moveAction.ReadValue<float>() : 0.0f;
             RotateValue = _rotateAction.IsPressed() ? _rotateAction.ReadValue<float>() : 0.0f;
         }
