@@ -20,7 +20,6 @@ namespace IT.WizardBattle.Services
         private List<ISpellInstance> _spellsPool = new();
 
 
-
         public void OnInitialized(IBootstrap bootstrap)
         {
             _playerInputService = bootstrap.GetService<PlayerInputService>();
@@ -50,9 +49,7 @@ namespace IT.WizardBattle.Services
 
             SpellData spellData = _playerService.SelectedSpell;
             if (!spellData.Id.Equals(spellInstance.SpellId))
-            {
                 spellInstance.SetupSpell(spellData);
-            }
 
             Transform shootingPoint = _playerService.PlayerShootingPoint;
 
@@ -60,15 +57,12 @@ namespace IT.WizardBattle.Services
         }
 
 
-
         private ISpellInstance GetSpellFromPool()
         {
             foreach (ISpellInstance instance in _spellsPool)
             {
                 if (!instance.Enabled)
-                {
                     return instance;
-                }
             }
 
             return null;
@@ -97,6 +91,5 @@ namespace IT.WizardBattle.Services
             _VFXService.PlayVisualEffect(spell.HitVFX, hitPosition);
             _damageService.OnSpellHitGameObject(spell, hitObject, hitPosition);
         }
-                
     }
 }

@@ -1,5 +1,4 @@
 ﻿using IT.Game.Services;
-using IT.WizardBattle.Assets.WizardBattle.Scripts.Game.Characters;
 using IT.WizardBattle.Data;
 using IT.WizardBattle.Game.Battle;
 using IT.WizardBattle.Interfaces;
@@ -32,6 +31,7 @@ namespace IT.WizardBattle.Game
 
         public CharacterMoveController MoveController => _moveController;
 
+
         [SerializeField] private Transform _visualContainer;
 
         private CharacterMoveController _moveController;
@@ -40,12 +40,7 @@ namespace IT.WizardBattle.Game
         private EnemyData _enemyData;
         private GameObject _visual;
         private MeleeEnemyAttack _meleeAttack;
-
-        private void Awake()
-        {
-            _moveController = GetComponent<CharacterMoveController>();
-            _characterDamageEffect = GetComponent<CharacterDamageEffect>();
-        }
+                
 
         public void SetupEnemy(EnemyStaticData characterData)
         {
@@ -91,11 +86,16 @@ namespace IT.WizardBattle.Game
         }
 
 
-
         private void ResetVisual()
         {
             if (_visual != null)
                 Destroy(_visual);
+        }
+
+        private void Awake()
+        {
+            _moveController = GetComponent<CharacterMoveController>();
+            _characterDamageEffect = GetComponent<CharacterDamageEffect>();
         }
 
         private void Update()
@@ -115,6 +115,5 @@ namespace IT.WizardBattle.Game
 
             _meleeAttack.TouchPlayer(player);
         }
-
     }
 }

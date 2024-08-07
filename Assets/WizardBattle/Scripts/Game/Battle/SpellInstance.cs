@@ -32,13 +32,7 @@ namespace IT.WizardBattle.Game
         private Rigidbody2D _rigidbody;
         private CircleCollider2D _circleCollider;
         private bool _isShooting;
-               
-
-        private void Awake()
-        {
-            _rigidbody = GetComponent<Rigidbody2D>();
-            _circleCollider = GetComponent<CircleCollider2D>();
-        }
+        
 
         public void SetupSpell(SpellData spellData)
         {
@@ -73,6 +67,11 @@ namespace IT.WizardBattle.Game
         }
 
 
+        private void Awake()
+        {
+            _rigidbody = GetComponent<Rigidbody2D>();
+            _circleCollider = GetComponent<CircleCollider2D>();
+        }
 
         private void Update()
         {

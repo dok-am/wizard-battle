@@ -1,5 +1,4 @@
-﻿
-namespace IT.Game.Services
+﻿namespace IT.Game.Services
 {
     public static class SimpleDamageCalculator 
     {

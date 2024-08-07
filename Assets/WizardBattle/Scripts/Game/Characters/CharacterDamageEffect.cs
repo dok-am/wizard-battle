@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace IT.WizardBattle.Assets.WizardBattle.Scripts.Game.Characters
+namespace IT.WizardBattle.Game
 {
     public class CharacterDamageEffect : MonoBehaviour
     {
@@ -12,6 +12,7 @@ namespace IT.WizardBattle.Assets.WizardBattle.Scripts.Game.Characters
 
         private const int EFFECT_BLINKING_COUNT = 3;
         private const float EFFECT_BLINKING_FREQUENCY = 5.0f;
+
 
         public void Initialize()
         {
@@ -37,7 +38,6 @@ namespace IT.WizardBattle.Assets.WizardBattle.Scripts.Game.Characters
         {
             StopAllCoroutines();
         }
-
 
 
         private IEnumerator Blinking()

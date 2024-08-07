@@ -19,6 +19,7 @@ namespace IT.WizardBattle.Data
 
         private float _health;
 
+
         public EnemyData(EnemyStaticData enemyStaticData)
         {
             EnemyStaticData = enemyStaticData;

@@ -11,6 +11,7 @@ namespace IT.WizardBattle
 
         private SceneBootstrap _scene;
 
+
         public override void Initialize(SceneBootstrap scene)
         {
             _scene = scene;
@@ -18,12 +19,10 @@ namespace IT.WizardBattle
         }
 
 
-
         private void OnRestartClicked()
         {
             _restartButton.enabled = false;
             _scene.ReloadScene();
         }
-        
     }
 }

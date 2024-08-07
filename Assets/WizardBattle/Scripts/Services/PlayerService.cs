@@ -10,8 +10,6 @@ namespace IT.WizardBattle.Services
 {
     public class PlayerService : MonoBehaviour, IService
     {
-        [SerializeField] private GameObject _playerPrefab;
-
         public delegate void PlayerHealthChangedHandler(float health, float maxHealth);
 
         public event Action<SpellData> OnSpellSelected;
@@ -25,6 +23,8 @@ namespace IT.WizardBattle.Services
         public Transform PlayerTransform => _player != null ? _player.GameObject.transform : null;
 
 
+        [SerializeField] private GameObject _playerPrefab;
+
         private PlayerData _playerData;
         private SpellData _selectedSpell;
 
@@ -32,7 +32,6 @@ namespace IT.WizardBattle.Services
         
         private SpawnPointsService _spawnPointsService;
         private PlayerInputService _playerInputService;
-
 
 
         public void OnInitialized(IBootstrap bootstrap)
@@ -51,8 +50,6 @@ namespace IT.WizardBattle.Services
         {
             DestroyPlayer();
         }
-
-
 
         public void RespawnPlayer(Vector3 position)
         {
@@ -103,7 +100,6 @@ namespace IT.WizardBattle.Services
         }
 
 
-
         private void DestroyPlayer()
         {
             if (_player != null)
@@ -130,6 +126,5 @@ namespace IT.WizardBattle.Services
             _playerData.AvailableSpells.AddRange(spellStorage.GetAllModels());
             _selectedSpell = _playerData.AvailableSpells[0];
         }
-
     }
 }

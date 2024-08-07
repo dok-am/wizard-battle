@@ -6,12 +6,12 @@ namespace IT.WizardBattle.Services
 {
     public class PlayerInputService : IService, IUpdatable
     {
-        public float MoveValue { get; private set; }
-        public float RotateValue { get; private set; }
-
         public event Action OnShootPressed;
         public event Action OnNextSpellPressed;
         public event Action OnPreviousSpellPressed;
+
+        public float MoveValue { get; private set; }
+        public float RotateValue { get; private set; }      
 
 
         private InputAction _moveAction;
@@ -60,7 +60,6 @@ namespace IT.WizardBattle.Services
             MoveValue = _moveAction.IsPressed() ? _moveAction.ReadValue<float>() : 0.0f;
             RotateValue = _rotateAction.IsPressed() ? _rotateAction.ReadValue<float>() : 0.0f;
         }
-
 
 
         private void ShootPressed(InputAction.CallbackContext context)

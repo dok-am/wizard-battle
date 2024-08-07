@@ -16,6 +16,7 @@ namespace IT.WizardBattle.Game.Battle
         private float _damage;
         private float _timer;
 
+
         public void Update(float dt)
         {
             _timer += dt;
@@ -30,10 +31,10 @@ namespace IT.WizardBattle.Game.Battle
             }
         }
 
+
         private void Attack(IPlayerInstance player)
         {
             player.ReceiveDamage(_damage);
         }
-
     }
 }

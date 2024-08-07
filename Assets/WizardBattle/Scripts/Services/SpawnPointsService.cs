@@ -11,9 +11,11 @@ namespace IT.WizardBattle.Services
         public Vector2 PlayerSpawnPoint => _playerSpawnPoint.transform.position;
         public Vector2[] EnemiesSpawnPoints => _enemiesSpawnPoints;
 
+
         private SpawnPoint[] _allSpawnPoints;
         private SpawnPoint _playerSpawnPoint;
         private Vector2[] _enemiesSpawnPoints;
+
 
         public void Initialize()
         {

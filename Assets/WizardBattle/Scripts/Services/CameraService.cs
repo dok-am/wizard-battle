@@ -5,12 +5,14 @@ namespace IT.WizardBattle.Services
 {
     public class CameraService : IService, IUpdatable
     {
-        private const float CAMERA_SMOOTH_SPEED = 10.0f;
-
         private Camera _camera;
         private Transform _targetToFollow;
 
         private float _cameraPozitionZ;
+
+
+        private const float CAMERA_SMOOTH_SPEED = 10.0f;
+
 
         public void Initialize()
         {

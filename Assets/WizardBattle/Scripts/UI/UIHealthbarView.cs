@@ -14,7 +14,6 @@ namespace IT.WizardBattle.UI
         private Coroutine _animationCoroutine;
 
 
-
         /// <summary>
         /// Set health amount
         /// </summary>
@@ -45,7 +44,6 @@ namespace IT.WizardBattle.UI
         }
 
 
-
         private IEnumerator FillHealthAnimated()
         {
             float speed = Mathf.Abs(_fillBar.fillAmount - _targetHealth) / _fillingDuration;
@@ -72,6 +70,5 @@ namespace IT.WizardBattle.UI
         {
             _fillBar.fillAmount = value;
         }
-
     }
 }

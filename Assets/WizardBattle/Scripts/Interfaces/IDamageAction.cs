@@ -1,5 +1,4 @@
-﻿
-namespace IT.WizardBattle.Interfaces
+﻿namespace IT.WizardBattle.Interfaces
 {
     public interface IDamageAction 
     {

@@ -18,12 +18,9 @@ namespace IT.WizardBattle.Game
         private float _moveValue;
         private float _rotationValue;
 
+
         private const string ANIMATOR_WALK_KEY = "Walk";
 
-        private void Awake()
-        {
-            _rigidbody = GetComponent<Rigidbody2D>();
-        }
 
         public void SetSpeed(float movementSpeed, float rotationSpeed)
         {
@@ -60,6 +57,10 @@ namespace IT.WizardBattle.Game
         }
 
 
+        private void Awake()
+        {
+            _rigidbody = GetComponent<Rigidbody2D>();
+        }
 
         private void Update()
         {

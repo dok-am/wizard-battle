@@ -17,6 +17,7 @@ namespace IT.WizardBattle.Services
         {
             _playerService = bootstrap.GetService<PlayerService>();
         }
+
         public void Destroy()
         {
             _enemies.Clear();    

@@ -1,6 +1,5 @@
 ﻿using IT.CoreLib.Interfaces;
 using IT.WizardBattle.Data;
-using IT.WizardBattle.Game;
 using IT.WizardBattle.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -22,6 +21,7 @@ namespace IT.WizardBattle.Services
         private bool _isSpawning;
         private float _spawnTimer;
         private List<IEnemyInstance> _enemiesPool = new();
+
 
         public void Initialize()
         {
@@ -73,7 +73,7 @@ namespace IT.WizardBattle.Services
             instance.Spawn(GetRandomSpawnPointOutOfView());
             _enemyAIService.AddEnemy(instance.MoveController);
         }
-
+        
         private IEnemyInstance GetEnemyFromPool(string typeId)
         {
             IEnemyInstance candidateEnemy = null;

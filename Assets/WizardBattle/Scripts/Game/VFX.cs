@@ -27,6 +27,7 @@ namespace IT.WizardBattle.Game
         private float _timer;
         private bool _isPlaying;
 
+
         public void Play(Vector2 position)
         {
             Enabled = true;
@@ -44,7 +45,8 @@ namespace IT.WizardBattle.Game
             Enabled = false;
         }
 
-        public void Update()
+
+        private void Update()
         {
             if (!_isPlaying)
                 return;
@@ -52,9 +54,7 @@ namespace IT.WizardBattle.Game
             _timer += Time.deltaTime;
 
             if (_timer >= _lifeTime)
-            {
                 Stop();
-            }
         }
     }
 }

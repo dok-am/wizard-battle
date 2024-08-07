@@ -8,20 +8,17 @@ namespace IT.WizardBattle.Services
 {
     public class VFXService : IService
     {
-
         private List<VFX> _effectsPool = new();
         private Transform _vfxContainer;
 
-        private const int MAX_EFFECTS_COUNT = 20;
 
+        private const int MAX_EFFECTS_COUNT = 20;
 
 
         public void OnInitialized(IBootstrap bootstrap) 
         {
             _vfxContainer = new GameObject("VFX_POOL").transform;
         }
-
-
 
         public void PlayVisualEffect(VFX effectPrefab, Vector2 position)
         {
@@ -33,7 +30,6 @@ namespace IT.WizardBattle.Services
 
             instance.Play(position);
         }
-
 
 
         private VFX TryGetEffectFromPool(string effectId)
@@ -71,6 +67,5 @@ namespace IT.WizardBattle.Services
 
             GameObject.Destroy(effect.gameObject);
         }
-
     }
 }

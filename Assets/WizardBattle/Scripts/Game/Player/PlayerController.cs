@@ -1,16 +1,15 @@
 using IT.WizardBattle.Services;
 using IT.WizardBattle.Interfaces;
 using UnityEngine;
-using IT.WizardBattle.Assets.WizardBattle.Scripts.Game.Characters;
 
 namespace IT.WizardBattle.Game.Player
 {
     [RequireComponent(typeof(CharacterMoveController))]
     public class PlayerController : MonoBehaviour, IPlayerInstance
     {
-        
         public GameObject GameObject => gameObject;
         public Transform ShootingPoint => _shootingPoint;
+
 
         [SerializeField] private Transform _shootingPoint;
 
@@ -19,14 +18,7 @@ namespace IT.WizardBattle.Game.Player
 
         private PlayerService _playerService;
         private PlayerInputService _playerInputService;
-
-
-        private void Awake()
-        {
-            _characterMoveController = GetComponent<CharacterMoveController>();
-            _characterDamageEffect = GetComponent<CharacterDamageEffect>();
-            _characterDamageEffect.Initialize();
-        }
+                
 
         public void Initialize(PlayerService playerService, PlayerInputService playerInputService, ICharacterData characterData)
         {
@@ -62,7 +54,6 @@ namespace IT.WizardBattle.Game.Player
         }
 
 
-
         private void OnNextSpellPressed()
         {
             _playerService.SelectNextSpell();
@@ -73,12 +64,17 @@ namespace IT.WizardBattle.Game.Player
             _playerService.SelectPreviousSpell();
         }
 
+        private void Awake()
+        {
+            _characterMoveController = GetComponent<CharacterMoveController>();
+            _characterDamageEffect = GetComponent<CharacterDamageEffect>();
+            _characterDamageEffect.Initialize();
+        }
+
         private void FixedUpdate()
         {
             _characterMoveController.Move(_playerInputService.MoveValue, Time.fixedDeltaTime);
             _characterMoveController.Rotate(_playerInputService.RotateValue, Time.fixedDeltaTime);
         }
-
-        
     }
 }
