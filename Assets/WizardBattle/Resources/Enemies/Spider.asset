@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _typeId: spider
   _maxHealth: 75
-  _defense: 1
+  _defense: 0
   _speed: 7
   _rotationSpeed: 100
   _meleeDamage: 10

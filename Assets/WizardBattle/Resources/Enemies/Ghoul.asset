@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _typeId: ghoul
   _maxHealth: 150
-  _defense: 0.7
+  _defense: 0.3
   _speed: 3
   _rotationSpeed: 20
   _meleeDamage: 20

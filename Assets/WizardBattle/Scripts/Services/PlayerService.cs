@@ -120,7 +120,7 @@ namespace IT.WizardBattle.Services
             {
                 Health = 100.0f,
                 MaxHealth = 100.0f,
-                Defense = 1.0f,
+                Defense = 0.0f,
                 MeleeDamage = 0.0f,
                 Speed = 5.0f,
                 RotationSpeed = 200.0f
