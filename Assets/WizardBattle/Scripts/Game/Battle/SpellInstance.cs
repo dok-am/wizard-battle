@@ -9,18 +9,20 @@ namespace IT.WizardBattle.Game
     {
         public event SpellHitHandler OnHitGameObject;
 
-        public string SpellId => _spellData != null ? _spellData.Id : null;
+        public string SpellId => _spellData?.Id;
 
         public bool Enabled {
             get
             {
-                return gameObject.activeSelf;
+                return gameObject != null && gameObject.activeSelf;
             }
             private set 
             {
-                gameObject.SetActive(value);
+                if (gameObject)
+                    gameObject.SetActive(value);
             }
         }
+
 
         [SerializeField] private Transform _visualsContainer;
 

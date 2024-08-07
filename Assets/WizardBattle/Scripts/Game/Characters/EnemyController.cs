@@ -15,17 +15,18 @@ namespace IT.WizardBattle.Game
         public event EnemyHealthChangeHandler OnEnemyHealthChanged;
 
         public GameObject GameObject => gameObject;
-        public string TypeId => _enemyData != null ? _enemyData.EnemyStaticData.Id : null;
+        public string TypeId => _enemyData?.EnemyStaticData?.Id;
 
         public bool Enabled
         {
             get
             {
-                return gameObject.activeSelf;
+                return gameObject != null && gameObject.activeSelf;
             }
             private set
             {
-                gameObject.SetActive(value);
+                if (gameObject != null) 
+                    gameObject.SetActive(value);
             }
         }
 

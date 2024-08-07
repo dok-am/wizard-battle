@@ -10,13 +10,15 @@ namespace IT.WizardBattle.Game
         public bool Enabled  {
             get 
             {
-                return gameObject.activeSelf;
+                return gameObject != null && gameObject.activeSelf;
             }
             private set 
             {
-                gameObject.SetActive(value);
+                if (gameObject != null)
+                    gameObject.SetActive(value);
             }
         }
+
 
         [SerializeField] private string _id;
         [SerializeField] private float _lifeTime;

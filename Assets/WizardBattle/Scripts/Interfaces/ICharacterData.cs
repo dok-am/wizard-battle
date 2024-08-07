@@ -7,8 +7,8 @@ namespace IT.WizardBattle.Interfaces
 
         /// <summary>
         /// From 0 to 1, where
-        /// 0 - immortal
-        /// 1 - no defence
+        /// 0 - no defence
+        /// 1 - immortal
         /// </summary>
         public float Defense { get;}
         public float Speed { get; }
