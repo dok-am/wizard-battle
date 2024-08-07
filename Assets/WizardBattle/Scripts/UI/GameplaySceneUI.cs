@@ -13,7 +13,8 @@ namespace IT.WizardBattle.UI
 
         private PlayerService _playerService;
 
-        public override void Initialize(SceneBootstrap scene, ApplicationUIContainer appUIContainer)
+
+        public override void Initialize(SceneContext scene, ApplicationUIContainer appUIContainer)
         {
             base.Initialize(scene, appUIContainer);
 
@@ -24,15 +25,12 @@ namespace IT.WizardBattle.UI
             OnSpellSelected(_playerService.SelectedSpell);
         }
 
-        
-
         public override void Deinitialize()
         {
             base.Deinitialize();
             _playerService.OnSpellSelected -= OnSpellSelected;
             _playerService.OnPlayerHealthChanged -= OnPlayerHealthChanged;
         }
-
 
 
         private void OnSpellSelected(SpellData spell)

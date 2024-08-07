@@ -20,12 +20,12 @@ namespace IT.WizardBattle.Services
         private List<ISpellInstance> _spellsPool = new();
 
 
-        public void OnInitialized(IBootstrap bootstrap)
+        public void OnInitialized(IContext context)
         {
-            _playerInputService = bootstrap.GetService<PlayerInputService>();
-            _playerService = bootstrap.GetService<PlayerService>();
-            _damageService = bootstrap.GetService<DamageService>();
-            _VFXService = bootstrap.GetService<VFXService>();
+            _playerInputService = context.GetService<PlayerInputService>();
+            _playerService = context.GetService<PlayerService>();
+            _damageService = context.GetService<DamageService>();
+            _VFXService = context.GetService<VFXService>();
 
             _playerInputService.OnShootPressed += OnShootPressed;
         }

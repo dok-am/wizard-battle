@@ -59291,7 +59291,7 @@ GameObject:
   - component: {fileID: 1823813783}
   - component: {fileID: 1823813782}
   m_Layer: 0
-  m_Name: GP_BOOTSTRAP
+  m_Name: GAMEPLAY_CONTEXT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -28,12 +28,12 @@ namespace IT.WizardBattle.Services
             _isSpawning = false;
         }
 
-        public void OnInitialized(IBootstrap bootstrap)
+        public void OnInitialized(IContext context)
         {
-            _spawnPoints = bootstrap.GetService<SpawnPointsService>().EnemiesSpawnPoints;
-            _enemiesData = bootstrap.GetService<EnemyDataStorage>().GetAllModels();
-            _enemyAIService = bootstrap.GetService<EnemyAIService>();
-            _cameraService = bootstrap.GetService<CameraService>();
+            _spawnPoints = context.GetService<SpawnPointsService>().EnemiesSpawnPoints;
+            _enemiesData = context.GetService<EnemyDataStorage>().GetAllModels();
+            _enemyAIService = context.GetService<EnemyAIService>();
+            _cameraService = context.GetService<CameraService>();
         }
 
         public void StartSpawning()

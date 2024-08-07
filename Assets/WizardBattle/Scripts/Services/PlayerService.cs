@@ -34,16 +34,16 @@ namespace IT.WizardBattle.Services
         private PlayerInputService _playerInputService;
 
 
-        public void OnInitialized(IBootstrap bootstrap)
+        public void OnInitialized(IContext context)
         {
-            LoadPlayerData(bootstrap.GetService<SpellDataStorage>());
+            LoadPlayerData(context.GetService<SpellDataStorage>());
 
-            _spawnPointsService = bootstrap.GetService<SpawnPointsService>();
-            _playerInputService = bootstrap.GetService<PlayerInputService>();
+            _spawnPointsService = context.GetService<SpawnPointsService>();
+            _playerInputService = context.GetService<PlayerInputService>();
 
             RespawnPlayer(_spawnPointsService.PlayerSpawnPoint);
 
-            bootstrap.GetService<CameraService>().SetTarget(_player.GameObject.transform);
+            context.GetService<CameraService>().SetTarget(_player.GameObject.transform);
         }
 
         public void Destroy()

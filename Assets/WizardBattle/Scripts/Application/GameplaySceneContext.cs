@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace IT.WizardBattle.Application
 {
-    public class GameplayBootstrap : SceneBootstrap
+    public class GameplaySceneContext : SceneContext
     {
         [Header("Services prefabs")]
         [SerializeField] private PlayerService _playerServicePrefab;

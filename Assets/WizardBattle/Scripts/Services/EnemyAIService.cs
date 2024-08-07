@@ -13,9 +13,9 @@ namespace IT.WizardBattle.Services
         private PlayerService _playerService;
         
 
-        public void OnInitialized(IBootstrap bootstrap)
+        public void OnInitialized(IContext context)
         {
-            _playerService = bootstrap.GetService<PlayerService>();
+            _playerService = context.GetService<PlayerService>();
         }
 
         public void Destroy()

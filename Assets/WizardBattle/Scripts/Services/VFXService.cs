@@ -15,7 +15,7 @@ namespace IT.WizardBattle.Services
         private const int MAX_EFFECTS_COUNT = 20;
 
 
-        public void OnInitialized(IBootstrap bootstrap) 
+        public void OnInitialized(IContext context) 
         {
             _vfxContainer = new GameObject("VFX_POOL").transform;
         }

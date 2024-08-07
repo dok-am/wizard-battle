@@ -9,10 +9,10 @@ namespace IT.WizardBattle
     {
         [SerializeField] private Button _restartButton;
 
-        private SceneBootstrap _scene;
+        private SceneContext _scene;
 
 
-        public override void Initialize(SceneBootstrap scene)
+        public override void Initialize(SceneContext scene)
         {
             _scene = scene;
             _restartButton.onClick.AddListener(OnRestartClicked);
