@@ -42,5 +42,13 @@ namespace IT.WizardBattle.Application
             SetPaused(true);
             SceneUI.ShowWindow<UIGameOverWindow>();
         }
+
+        protected override void OnDestroy()
+        {
+            if (_playerService != null)
+                _playerService.OnPlayerDied -= OnPlayerDied;
+
+            base.OnDestroy();
+        }
     }
 }
