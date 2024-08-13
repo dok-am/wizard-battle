@@ -1,4 +1,5 @@
-﻿using IT.CoreLib.Interfaces;
+﻿using IT.CoreLib.Extensions;
+using IT.CoreLib.Interfaces;
 using IT.WizardBattle.Data;
 using IT.WizardBattle.Interfaces;
 using System;
@@ -7,16 +8,17 @@ using UnityEngine;
 
 namespace IT.WizardBattle.Services
 {
-    public class EnemySpawnerService : MonoBehaviour, IService
+    public class EnemySpawnerService : IService, IUpdatable
     {
-        [SerializeField] private GameObject _enemyInstancePrefab;
-        [SerializeField] private float _spawnerCooldownTime = 1.0f;
-        [SerializeField] private int _maximalEnemiesCount = 10;
+        public event Func<Vector2, bool> RequestIsPointVisible;
+        public event Func<Vector2> RequestEnemySpawnPoint;
+        public event Func<GameObject> RequestEnemyInstancePrefab;
 
-        private Vector2[] _spawnPoints;
+        private const float SPAWNER_COOLDOWN_TIME = 1.0f;
+        private const int MAX_ENEMIES_COUNT = 10;
+
         private EnemyStaticData[] _enemiesData;
         private EnemyAIService _enemyAIService;
-        private CameraService _cameraService;
 
         private bool _isSpawning;
         private float _spawnTimer;
@@ -30,26 +32,33 @@ namespace IT.WizardBattle.Services
 
         public void OnInitialized(IContext context)
         {
-            _spawnPoints = context.GetService<SpawnPointsService>().EnemiesSpawnPoints;
             _enemiesData = context.GetService<EnemyDataStorage>().GetAllModels();
             _enemyAIService = context.GetService<EnemyAIService>();
-            _cameraService = context.GetService<CameraService>();
         }
 
         public void StartSpawning()
         {
+            if (RequestIsPointVisible == null)
+                throw new Exception("[SERVICE] Enemy spawn service isn't initialized: need RequestIsPointVisible binded");
+
+            if (RequestEnemySpawnPoint == null)
+                throw new Exception("[SERVICE] Enemy spawn service isn't initialized: need RequestEnemySpawnPoint binded");
+
+            if (RequestEnemyInstancePrefab == null)
+                throw new Exception("[SERVICE] Enemy spawn service isn't initialized: need RequestEnemyInstancePrefab binded");
+
             _isSpawning = true;
             _spawnTimer = 0.0f;
         }
 
 
-        private void Update()
+        public void Update(float dt)
         {
             if (!_isSpawning)
                 return;
 
-            _spawnTimer += Time.deltaTime;
-            if (_spawnTimer >= _spawnerCooldownTime)
+            _spawnTimer += dt;
+            if (_spawnTimer >= SPAWNER_COOLDOWN_TIME)
             {
                 SpawnRandomEnemy();
                 _spawnTimer = 0.0f;
@@ -61,8 +70,8 @@ namespace IT.WizardBattle.Services
             if (!IsEnemyAvailable())
                 return;
 
-            EnemyStaticData enemyData = GetRandomItem(_enemiesData);
-
+            EnemyStaticData enemyData = _enemiesData.GetRandomItem();
+            
             IEnemyInstance instance = GetEnemyFromPool(enemyData.Id);
             if (instance == null) 
             {
@@ -100,7 +109,7 @@ namespace IT.WizardBattle.Services
                 if (enemy.Enabled)
                     activeEnemies++;
 
-                if (activeEnemies >= _maximalEnemiesCount)
+                if (activeEnemies >= MAX_ENEMIES_COUNT)
                     return false;
             }
 
@@ -109,7 +118,7 @@ namespace IT.WizardBattle.Services
 
         private IEnemyInstance CreateNewEnemy()
         {
-            IEnemyInstance instance = Instantiate(_enemyInstancePrefab).GetComponent<IEnemyInstance>();
+            IEnemyInstance instance = GameObject.Instantiate(RequestEnemyInstancePrefab()).GetComponent<IEnemyInstance>();
             if (instance == null)
                 throw new Exception("[ENEMY] Can't spawn enemy: basic prefab is incorrect!");
 
@@ -120,17 +129,13 @@ namespace IT.WizardBattle.Services
 
         private Vector2 GetRandomSpawnPointOutOfView()
         {
-            Vector2 spawnPoint = GetRandomItem(_spawnPoints);
+            Vector2 spawnPoint = RequestEnemySpawnPoint();
 
-            if (_cameraService.IsPointVisible(spawnPoint))
-                return GetRandomItem(_spawnPoints);
+            if (RequestIsPointVisible.Invoke(spawnPoint))
+                return GetRandomSpawnPointOutOfView();
 
             return spawnPoint;
         }
 
-        private T GetRandomItem<T>(T[] array)
-        {
-            return array[UnityEngine.Random.Range(0, array.Length)];
-        }
     }
 }

@@ -8,8 +8,8 @@ namespace IT.WizardBattle.Interfaces
         public GameObject GameObject { get; }
         public Transform ShootingPoint { get; }
 
-        public void Initialize(PlayerService playerService, PlayerInputService playerInputService, ICharacterData characterData);
-        public void Deinitialize();
+        public void Initialize(PlayerService playerService, ICharacterData characterData);
+        
         public void Die();
     }
 }

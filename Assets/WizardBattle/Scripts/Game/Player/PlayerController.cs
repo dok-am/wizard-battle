@@ -17,28 +17,26 @@ namespace IT.WizardBattle.Game.Player
         private CharacterDamageEffect _characterDamageEffect;
 
         private PlayerService _playerService;
-        private PlayerInputService _playerInputService;
-                
 
-        public void Initialize(PlayerService playerService, PlayerInputService playerInputService, ICharacterData characterData)
+        private float _moveInput;
+        private float _rotationInput;
+
+        public void Initialize(PlayerService playerService, ICharacterData characterData)
         {
             _playerService = playerService;
-            _playerInputService = playerInputService;
-            _playerInputService.OnNextSpellPressed += OnNextSpellPressed;
-            _playerInputService.OnPreviousSpellPressed += OnPreviousSpellPressed;
 
             UpdateData(characterData);
-        }
-
-        public void Deinitialize()
-        {
-            _playerInputService.OnNextSpellPressed -= OnNextSpellPressed;
-            _playerInputService.OnPreviousSpellPressed -= OnPreviousSpellPressed;
         }
 
         public void UpdateData(ICharacterData characterData)
         {
             _characterMoveController.SetSpeed(characterData.Speed, characterData.RotationSpeed);
+        }
+
+        public void UpdateInput(float move, float rotation)
+        {
+            _moveInput = move;
+            _rotationInput = rotation;
         }
 
         public void ReceiveDamage(float damage)
@@ -54,16 +52,6 @@ namespace IT.WizardBattle.Game.Player
         }
 
 
-        private void OnNextSpellPressed()
-        {
-            _playerService.SelectNextSpell();
-        }
-
-        private void OnPreviousSpellPressed()
-        {
-            _playerService.SelectPreviousSpell();
-        }
-
         private void Awake()
         {
             _characterMoveController = GetComponent<CharacterMoveController>();
@@ -73,8 +61,8 @@ namespace IT.WizardBattle.Game.Player
 
         private void FixedUpdate()
         {
-            _characterMoveController.Move(_playerInputService.MoveValue, Time.fixedDeltaTime);
-            _characterMoveController.Rotate(_playerInputService.RotateValue, Time.fixedDeltaTime);
+            _characterMoveController.Move(_moveInput, Time.fixedDeltaTime);
+            _characterMoveController.Rotate(_rotationInput, Time.fixedDeltaTime);
         }
     }
 }

@@ -147,7 +147,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 450279a518b44ff4996075f651667226, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UIContainerPrefab: {fileID: 1319999872057698140, guid: cec58895fe7a86340b651b1aabf174c3, type: 3}
+  _UIContainerPrefab: {fileID: 1319999872057698140, guid: cec58895fe7a86340b651b1aabf174c3, type: 3}
+  _defaultSceneName: MainScene
 --- !u!4 &1596416123
 Transform:
   m_ObjectHideFlags: 0

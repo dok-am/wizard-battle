@@ -7,10 +7,11 @@ using UnityEngine;
 
 namespace IT.WizardBattle.Services
 {
-    public class PlayerCastSpellsService : MonoBehaviour, IService
+    public class PlayerCastSpellsService : IService
     {
-        [SerializeField] private GameObject _spellInstancePrefab;
-        [SerializeField] private Transform _spellsPoolContainer;
+        public event Func<GameObject> RequestSpellInstancePrefab;
+        
+        private Transform _spellsPoolContainer;
 
         private PlayerService _playerService;
         private PlayerInputService _playerInputService;
@@ -22,6 +23,8 @@ namespace IT.WizardBattle.Services
 
         public void OnInitialized(IContext context)
         {
+            _spellsPoolContainer = new GameObject("SPELLS_POOL").transform;
+
             _playerInputService = context.GetService<PlayerInputService>();
             _playerService = context.GetService<PlayerService>();
             _damageService = context.GetService<DamageService>();
@@ -75,7 +78,7 @@ namespace IT.WizardBattle.Services
 
         private ISpellInstance AddNewSpellInstance()
         {
-            ISpellInstance instance = Instantiate(_spellInstancePrefab, _spellsPoolContainer).GetComponent<ISpellInstance>();
+            ISpellInstance instance = GameObject.Instantiate(RequestSpellInstancePrefab(), _spellsPoolContainer).GetComponent<ISpellInstance>();
             if (instance == null)
                 throw new Exception("[SPELL] Can't instantiate spell: prefab is wrong!");
 

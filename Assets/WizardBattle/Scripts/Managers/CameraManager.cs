@@ -1,9 +1,9 @@
-using IT.CoreLib.Interfaces;
+﻿using IT.CoreLib.Interfaces;
 using UnityEngine;
 
-namespace IT.WizardBattle.Services
+namespace IT.WizardBattle.Managers
 {
-    public class CameraService : IService, IUpdatable
+    public class CameraManager : IManager, IUpdatable
     {
         private Camera _camera;
         private Transform _targetToFollow;
@@ -14,10 +14,9 @@ namespace IT.WizardBattle.Services
         private const float CAMERA_SMOOTH_SPEED = 10.0f;
 
 
-        public void Initialize()
+        public CameraManager(Camera camera)
         {
-            //If we'll want to improve camera system we could start here
-            _camera = Camera.main;
+            _camera = camera;
             _cameraPozitionZ = _camera.transform.position.z;
         }
 
@@ -41,6 +40,11 @@ namespace IT.WizardBattle.Services
         {
             Vector3 viewportPoint = _camera.WorldToViewportPoint(point);
             return new Rect(0, 0, 1, 1).Contains(viewportPoint);
+        }
+
+        public void Unbind() 
+        {
+            //nothing to unbind
         }
     }
 }

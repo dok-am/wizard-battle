@@ -22,7 +22,7 @@ namespace IT.WizardBattle
         private void OnRestartClicked()
         {
             _restartButton.enabled = false;
-            _scene.ReloadScene();
+            ApplicationContext.Instance.ReloadCurrentScene();
         }
     }
 }

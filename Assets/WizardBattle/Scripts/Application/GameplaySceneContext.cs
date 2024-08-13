@@ -6,11 +6,6 @@ namespace IT.WizardBattle.Application
 {
     public class GameplaySceneContext : SceneContext
     {
-        [Header("Services prefabs")]
-        [SerializeField] private PlayerService _playerServicePrefab;
-        [SerializeField] private PlayerCastSpellsService _playerCastSpellsServicePrefab;
-        [SerializeField] private EnemySpawnerService _enemySpawnerServicePrefab;
-
         private EnemySpawnerService _enemySpawnerService;
         private PlayerService _playerService;
         
@@ -19,28 +14,20 @@ namespace IT.WizardBattle.Application
             AddService<PlayerInputService>();
             AddService<SpellDataStorage>();
             AddService<EnemyDataStorage>();
-            AddService<SpawnPointsService>();
             AddService<EnemyAIService>();
-            _playerService = AddService<PlayerService>(_playerServicePrefab.gameObject);
-            AddService<CameraService>();
-            AddService<PlayerCastSpellsService>(_playerCastSpellsServicePrefab.gameObject);
+            AddService<PlayerCastSpellsService>();
             AddService<DamageService>();
             AddService<VFXService>();
 
-            _enemySpawnerService = AddService<EnemySpawnerService>(_enemySpawnerServicePrefab.gameObject);
+            _playerService = AddService<PlayerService>();
+            _enemySpawnerService = AddService<EnemySpawnerService>();
         }
 
         protected override void InitializeScene()
         {
-            _enemySpawnerService.StartSpawning();
             _playerService.OnPlayerDied += OnPlayerDied;
 
-        }
-
-        private void OnPlayerDied()
-        {
-            SetPaused(true);
-            SceneUI.ShowWindow<UIGameOverWindow>();
+            StartGame();
         }
 
         protected override void OnDestroy()
@@ -49,6 +36,19 @@ namespace IT.WizardBattle.Application
                 _playerService.OnPlayerDied -= OnPlayerDied;
 
             base.OnDestroy();
+        }
+
+
+        private void StartGame()
+        {
+            _playerService.RespawnPlayer();
+            _enemySpawnerService.StartSpawning();
+        }
+
+        private void OnPlayerDied()
+        {
+            SetPaused(true);
+            SceneUI.ShowWindow<UIGameOverWindow>();
         }
     }
 }

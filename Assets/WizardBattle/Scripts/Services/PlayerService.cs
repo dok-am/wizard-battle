@@ -8,7 +8,7 @@ using IT.Game.Services;
 
 namespace IT.WizardBattle.Services
 {
-    public class PlayerService : MonoBehaviour, IService
+    public class PlayerService : IService
     {
         public delegate void PlayerHealthChangedHandler(float health, float maxHealth);
 
@@ -16,52 +16,39 @@ namespace IT.WizardBattle.Services
         public event PlayerHealthChangedHandler OnPlayerHealthChanged;
         public event Action OnPlayerDied;
 
+        public event Func<IPlayerInstance> RequestPlayerInstance;
+        public event Action<ICharacterData> RequestRespawnPlayer;
+
         public ICharacterData PlayerData => _playerData;
         public SpellData[] AvailableSpells => _playerData.AvailableSpells.ToArray();
         public SpellData SelectedSpell => _selectedSpell;
-        public Transform PlayerShootingPoint => _player != null ? _player.ShootingPoint : null;
-        public Transform PlayerTransform => _player != null ? _player.GameObject.transform : null;
+        public Transform PlayerShootingPoint => RequestPlayerInstance?.Invoke().ShootingPoint;
+        public Transform PlayerTransform => RequestPlayerInstance?.Invoke().GameObject.transform;
 
-
-        [SerializeField] private GameObject _playerPrefab;
 
         private PlayerData _playerData;
         private SpellData _selectedSpell;
-
-        private IPlayerInstance _player;
         
-        private SpawnPointsService _spawnPointsService;
         private PlayerInputService _playerInputService;
-
 
         public void OnInitialized(IContext context)
         {
             LoadPlayerData(context.GetService<SpellDataStorage>());
 
-            _spawnPointsService = context.GetService<SpawnPointsService>();
             _playerInputService = context.GetService<PlayerInputService>();
-
-            RespawnPlayer(_spawnPointsService.PlayerSpawnPoint);
-
-            context.GetService<CameraService>().SetTarget(_player.GameObject.transform);
+            _playerInputService.OnPreviousSpellPressed += SelectPreviousSpell;
+            _playerInputService.OnNextSpellPressed += SelectNextSpell;
         }
 
-        public void Destroy()
+        public void OnDestroy()
         {
-            DestroyPlayer();
+            _playerInputService.OnPreviousSpellPressed -= SelectPreviousSpell;
+            _playerInputService.OnNextSpellPressed -= SelectNextSpell;
         }
 
-        public void RespawnPlayer(Vector3 position)
+        public void RespawnPlayer()
         {
-            if (_player != null)
-                DestroyPlayer();
-
-            _player = Instantiate(_playerPrefab, position, Quaternion.identity).GetComponent<IPlayerInstance>();
-
-            if (_player == null)
-                throw new Exception("[PLAYER] Player's prefab is wrong!");
-
-            _player.Initialize(this, _playerInputService, _playerData);
+            RequestRespawnPlayer(_playerData);
         }
 
         public void SelectNextSpell()
@@ -94,19 +81,11 @@ namespace IT.WizardBattle.Services
             OnPlayerHealthChanged?.Invoke(_playerData.Health, _playerData.MaxHealth);
 
             if (_playerData.Health <= 0.0f) {
-                _player.Die();
+                
                 OnPlayerDied?.Invoke();
             }
         }
 
-
-        private void DestroyPlayer()
-        {
-            if (_player != null)
-                _player.Deinitialize();
-
-            _player = null;
-        }
 
         private void LoadPlayerData(SpellDataStorage spellStorage)
         {

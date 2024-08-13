@@ -63,7 +63,9 @@ namespace IT.WizardBattle.Game
         public void Deinitialize()
         {
             OnHitGameObject = null;
-            Destroy(gameObject);
+
+            if (gameObject != null)
+                Destroy(gameObject);
         }
 
 
