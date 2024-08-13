@@ -26,7 +26,7 @@ namespace IT.WizardBattle.Game
 
         [SerializeField] private Transform _visualsContainer;
 
-        private SpellData _spellData;
+        private SpellConfig _spellData;
 
         private GameObject _spellVisuals;
         private Rigidbody2D _rigidbody;
@@ -34,7 +34,7 @@ namespace IT.WizardBattle.Game
         private bool _isShooting;
         
 
-        public void SetupSpell(SpellData spellData)
+        public void SetupSpell(SpellConfig spellData)
         {
             _spellData = spellData;
 

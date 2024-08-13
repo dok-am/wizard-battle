@@ -12,6 +12,6 @@ namespace IT.WizardBattle.Data
         public float Speed { get; set; }
         public float RotationSpeed { get; set; }
         public float MeleeDamage { get; set; }
-        public List<SpellData> AvailableSpells { get; } = new List<SpellData>();
+        public List<SpellConfig> AvailableSpells { get; } = new List<SpellConfig>();
     }
 }

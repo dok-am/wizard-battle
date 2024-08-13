@@ -12,7 +12,7 @@ namespace IT.WizardBattle.Services
     {
         public delegate void PlayerHealthChangedHandler(float health, float maxHealth);
 
-        public event Action<SpellData> OnSpellSelected;
+        public event Action<SpellConfig> OnSpellSelected;
         public event PlayerHealthChangedHandler OnPlayerHealthChanged;
         public event Action OnPlayerDied;
 
@@ -20,20 +20,20 @@ namespace IT.WizardBattle.Services
         public event Action<ICharacterData> RequestRespawnPlayer;
 
         public ICharacterData PlayerData => _playerData;
-        public SpellData[] AvailableSpells => _playerData.AvailableSpells.ToArray();
-        public SpellData SelectedSpell => _selectedSpell;
+        public SpellConfig[] AvailableSpells => _playerData.AvailableSpells.ToArray();
+        public SpellConfig SelectedSpell => _selectedSpell;
         public Transform PlayerShootingPoint => RequestPlayerInstance?.Invoke().ShootingPoint;
         public Transform PlayerTransform => RequestPlayerInstance?.Invoke().GameObject.transform;
 
 
         private PlayerData _playerData;
-        private SpellData _selectedSpell;
+        private SpellConfig _selectedSpell;
         
         private PlayerInputService _playerInputService;
 
         public void OnInitialized(IContext context)
         {
-            LoadPlayerData(context.GetService<SpellDataStorage>());
+            LoadPlayerData(context.GetService<SpellConfigStorage>());
 
             _playerInputService = context.GetService<PlayerInputService>();
             _playerInputService.OnPreviousSpellPressed += SelectPreviousSpell;
@@ -87,7 +87,7 @@ namespace IT.WizardBattle.Services
         }
 
 
-        private void LoadPlayerData(SpellDataStorage spellStorage)
+        private void LoadPlayerData(SpellConfigStorage spellStorage)
         {
             //TODO: load it from save/config
 
@@ -102,7 +102,7 @@ namespace IT.WizardBattle.Services
             };
 
             //For now, just adding everything we have in storage
-            _playerData.AvailableSpells.AddRange(spellStorage.GetAllModels());
+            _playerData.AvailableSpells.AddRange(spellStorage.GetAllConfigs());
             _selectedSpell = _playerData.AvailableSpells[0];
         }
     }

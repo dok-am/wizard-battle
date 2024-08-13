@@ -1,11 +1,12 @@
 ﻿using IT.CoreLib.Interfaces;
 using IT.WizardBattle.Interfaces;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace IT.WizardBattle.Data
 {
     [CreateAssetMenu(fileName = "Enemy", menuName = "Wizard Battle/Enemy")]
-    public class EnemyStaticData : ScriptableObject, ICharacterData, IStaticModel
+    public class EnemyStaticConfig : ScriptableObject, ICharacterData, IStaticConfig
     {
         public string Id => _typeId;
         public float MaxHealth => _maxHealth;

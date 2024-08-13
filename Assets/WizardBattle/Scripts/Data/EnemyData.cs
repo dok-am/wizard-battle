@@ -4,7 +4,7 @@ namespace IT.WizardBattle.Data
 {
     public class EnemyData 
     {
-        public EnemyStaticData EnemyStaticData { get; private set; }
+        public EnemyStaticConfig EnemyStaticData { get; private set; }
         
         public float Health { 
             get
@@ -20,7 +20,7 @@ namespace IT.WizardBattle.Data
         private float _health;
 
 
-        public EnemyData(EnemyStaticData enemyStaticData)
+        public EnemyData(EnemyStaticConfig enemyStaticData)
         {
             EnemyStaticData = enemyStaticData;
             _health = enemyStaticData.MaxHealth;

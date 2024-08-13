@@ -7,7 +7,7 @@ namespace IT.WizardBattle.Services
 {
     public class DamageService : IService
     {
-        public void OnSpellHitGameObject(SpellData spell, GameObject gameObject, Vector2 position)
+        public void OnSpellHitGameObject(SpellConfig spell, GameObject gameObject, Vector2 position)
         {
             IDamagable damagable = gameObject.GetComponent<IDamagable>();
             if (damagable == null)

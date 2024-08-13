@@ -6,7 +6,7 @@ using UnityEngine;
 namespace IT.WizardBattle.Data
 {
     [CreateAssetMenu(fileName = "Spell", menuName = "Wizard Battle/Spell")]
-    public class SpellData : ScriptableObject, IStaticModel
+    public class SpellConfig : ScriptableObject, IStaticConfig
     {
         public string Id => _id;
         public int Damage => _damage;

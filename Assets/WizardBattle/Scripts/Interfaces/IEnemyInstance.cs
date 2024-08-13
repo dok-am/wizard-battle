@@ -18,7 +18,7 @@ namespace IT.WizardBattle.Interfaces
         public string TypeId { get; }
         public bool Enabled { get; }
 
-        public void SetupEnemy(EnemyStaticData characterData);
+        public void SetupEnemy(EnemyStaticConfig characterData);
         public void Deinitialize();
         public void Spawn(Vector2 spawnPoint);
         public void Die();

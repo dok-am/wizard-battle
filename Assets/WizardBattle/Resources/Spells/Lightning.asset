@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5d2d1174ee8b144ba5640c8d7d0d851, type: 3}
+  m_Script: {fileID: 11500000, guid: 0040917ad701d45498f87b5f709739fb, type: 3}
   m_Name: Lightning
   m_EditorClassIdentifier: 
   _id: lightning

@@ -33,7 +33,7 @@ namespace IT.WizardBattle.UI
         }
 
 
-        private void OnSpellSelected(SpellData spell)
+        private void OnSpellSelected(SpellConfig spell)
         {
            _spells.SelectSpell(spell);
         }

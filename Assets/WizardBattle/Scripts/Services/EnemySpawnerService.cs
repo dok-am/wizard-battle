@@ -17,7 +17,7 @@ namespace IT.WizardBattle.Services
         private const float SPAWNER_COOLDOWN_TIME = 1.0f;
         private const int MAX_ENEMIES_COUNT = 10;
 
-        private EnemyStaticData[] _enemiesData;
+        private EnemyStaticConfig[] _enemiesData;
         private EnemyAIService _enemyAIService;
 
         private bool _isSpawning;
@@ -32,7 +32,7 @@ namespace IT.WizardBattle.Services
 
         public void OnInitialized(IContext context)
         {
-            _enemiesData = context.GetService<EnemyDataStorage>().GetAllModels();
+            _enemiesData = context.GetService<EnemyConfigStorage>().GetAllConfigs();
             _enemyAIService = context.GetService<EnemyAIService>();
         }
 
@@ -70,7 +70,7 @@ namespace IT.WizardBattle.Services
             if (!IsEnemyAvailable())
                 return;
 
-            EnemyStaticData enemyData = _enemiesData.GetRandomItem();
+            EnemyStaticConfig enemyData = _enemiesData.GetRandomItem();
             
             IEnemyInstance instance = GetEnemyFromPool(enemyData.Id);
             if (instance == null) 

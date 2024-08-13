@@ -8,7 +8,7 @@ namespace IT.WizardBattle.UI
     {
         [SerializeField] private Image _selectedSpellIcon;
 
-        public void SelectSpell(SpellData spell)
+        public void SelectSpell(SpellConfig spell)
         {
             _selectedSpellIcon.sprite = spell.Icon;
             _selectedSpellIcon.color = spell.IconTint;

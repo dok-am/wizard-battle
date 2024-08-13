@@ -42,7 +42,7 @@ namespace IT.WizardBattle.Game
         private MeleeEnemyAttack _meleeAttack;
                 
 
-        public void SetupEnemy(EnemyStaticData characterData)
+        public void SetupEnemy(EnemyStaticConfig characterData)
         {
             _enemyData = new EnemyData(characterData);
             _moveController.SetSpeed(characterData.Speed, characterData.RotationSpeed);

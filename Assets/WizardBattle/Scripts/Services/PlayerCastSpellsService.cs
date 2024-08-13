@@ -50,7 +50,7 @@ namespace IT.WizardBattle.Services
             if (spellInstance == null)
                 spellInstance = AddNewSpellInstance();
 
-            SpellData spellData = _playerService.SelectedSpell;
+            SpellConfig spellData = _playerService.SelectedSpell;
             if (!spellData.Id.Equals(spellInstance.SpellId))
                 spellInstance.SetupSpell(spellData);
 
@@ -89,7 +89,7 @@ namespace IT.WizardBattle.Services
             return instance;
         }
 
-        private void OnSpellHitGameObject(SpellData spell, GameObject hitObject, Vector2 hitPosition)
+        private void OnSpellHitGameObject(SpellConfig spell, GameObject hitObject, Vector2 hitPosition)
         {
             _VFXService.PlayVisualEffect(spell.HitVFX, hitPosition);
             _damageService.OnSpellHitGameObject(spell, hitObject, hitPosition);

@@ -3,9 +3,9 @@ using IT.WizardBattle.Data;
 
 namespace IT.WizardBattle.Services
 {
-    public class EnemyDataStorage : StorageServiceBase<EnemyStaticData>
+    public class EnemyConfigStorage : StaticConfigStorageBase<EnemyStaticConfig>
     {
-        public EnemyDataStorage() 
+        public EnemyConfigStorage() 
         {
             _pathToStorage = "Enemies/";
         }
