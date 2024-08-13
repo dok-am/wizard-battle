@@ -54,6 +54,8 @@ namespace IT.WizardBattle.Application
                 _playerCastSpellsService.RequestSpellInstancePrefab -= GetSpellPrefabGO;
 
             _playerManager.OnPlayerSpawned -= OnPlayerSpawned;
+
+            base.Unbind(context);
         }
 
 
