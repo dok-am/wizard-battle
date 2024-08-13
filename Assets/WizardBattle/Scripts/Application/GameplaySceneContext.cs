@@ -1,6 +1,5 @@
 using IT.CoreLib.Application;
 using IT.WizardBattle.Services;
-using UnityEngine;
 
 namespace IT.WizardBattle.Application
 {

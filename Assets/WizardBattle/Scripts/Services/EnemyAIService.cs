@@ -33,7 +33,8 @@ namespace IT.WizardBattle.Services
             foreach(CharacterMoveController moveController in _enemies)
             {
                 //Dumb but still AI
-                MoveAndRotateTowardsPlayer(moveController, dt);
+                if (moveController.gameObject.activeInHierarchy)
+                    MoveAndRotateTowardsPlayer(moveController, dt);
             }
         }
 

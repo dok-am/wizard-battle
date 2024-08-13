@@ -27,18 +27,19 @@ namespace IT.WizardBattle.Application
         private PlayerManager _playerManager;
         private CameraManager _cameraManager;
         private SpawnPointsManager _spawnPointsManager;
+        private EnemySpawnManager _enemySpawnManager;
 
         public override void Bind(IContext context)
         {
             _enemySpawnerService = context.GetService<EnemySpawnerService>();
             _playerCastSpellsService = context.GetService<PlayerCastSpellsService>();
 
-            _enemySpawnerService.RequestEnemyInstancePrefab += GetEnemyPrefabGO;
             _playerCastSpellsService.RequestSpellInstancePrefab += GetSpellPrefabGO;
 
             BindSpawnPoints(context);
             BindPlayer(context);
             BindCamera(context);
+            BindEnemiesSpawner(context);
         }
 
         public override void Unbind(IContext context)
@@ -47,7 +48,7 @@ namespace IT.WizardBattle.Application
             {
                 _enemySpawnerService.RequestIsPointVisible -= _cameraManager.IsPointVisible;
                 _enemySpawnerService.RequestEnemySpawnPoint -= _spawnPointsManager.GetRandomEnemySpawnPoint;
-                _enemySpawnerService.RequestEnemyInstancePrefab -= GetEnemyPrefabGO;
+                _enemySpawnerService.RequestSpawnEnemy += _enemySpawnManager.SpawnEnemyIfPossible;
             }
 
             if (_playerCastSpellsService != null)
@@ -87,7 +88,12 @@ namespace IT.WizardBattle.Application
             AddManager(_spawnPointsManager);
         }
 
-        private GameObject GetEnemyPrefabGO() => _enemyInstancePrefab.GameObject;
+        private void BindEnemiesSpawner(IContext context)
+        {
+            _enemySpawnManager = new(_enemyInstancePrefab, context.GetService<EnemyAIService>());
+            _enemySpawnerService.RequestSpawnEnemy += _enemySpawnManager.SpawnEnemyIfPossible;
+        }
+
         private GameObject GetSpellPrefabGO() => _spellInstancePrefab.gameObject;
 
         private void OnPlayerSpawned(IPlayerInstance playerInstance)

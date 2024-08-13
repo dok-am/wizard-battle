@@ -37,6 +37,7 @@ namespace IT.WizardBattle.Game
         public void StopDamageEffect()
         {
             StopAllCoroutines();
+            _sprite.color = _originalColor;
         }
 
 

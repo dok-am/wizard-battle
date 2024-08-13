@@ -1,9 +1,7 @@
 ﻿using IT.CoreLib.Extensions;
 using IT.CoreLib.Interfaces;
 using IT.WizardBattle.Data;
-using IT.WizardBattle.Interfaces;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace IT.WizardBattle.Services
@@ -12,17 +10,15 @@ namespace IT.WizardBattle.Services
     {
         public event Func<Vector2, bool> RequestIsPointVisible;
         public event Func<Vector2> RequestEnemySpawnPoint;
-        public event Func<GameObject> RequestEnemyInstancePrefab;
+        public event Action<EnemyStaticConfig, Vector2> RequestSpawnEnemy;
 
         private const float SPAWNER_COOLDOWN_TIME = 1.0f;
-        private const int MAX_ENEMIES_COUNT = 10;
+        
 
-        private EnemyStaticConfig[] _enemiesData;
-        private EnemyAIService _enemyAIService;
+        private EnemyStaticConfig[] _enemiesConfigs;
 
         private bool _isSpawning;
         private float _spawnTimer;
-        private List<IEnemyInstance> _enemiesPool = new();
 
 
         public void Initialize()
@@ -32,8 +28,7 @@ namespace IT.WizardBattle.Services
 
         public void OnInitialized(IContext context)
         {
-            _enemiesData = context.GetService<EnemyConfigStorage>().GetAllConfigs();
-            _enemyAIService = context.GetService<EnemyAIService>();
+            _enemiesConfigs = context.GetService<EnemyConfigStorage>().GetAllConfigs();
         }
 
         public void StartSpawning()
@@ -44,8 +39,8 @@ namespace IT.WizardBattle.Services
             if (RequestEnemySpawnPoint == null)
                 throw new Exception("[SERVICE] Enemy spawn service isn't initialized: need RequestEnemySpawnPoint binded");
 
-            if (RequestEnemyInstancePrefab == null)
-                throw new Exception("[SERVICE] Enemy spawn service isn't initialized: need RequestEnemyInstancePrefab binded");
+            if (RequestSpawnEnemy == null)
+                throw new Exception("[SERVICE] Enemy spawn service isn't initialized: need RequestSpawnEnemy binded");
 
             _isSpawning = true;
             _spawnTimer = 0.0f;
@@ -67,65 +62,10 @@ namespace IT.WizardBattle.Services
 
         private void SpawnRandomEnemy()
         {
-            if (!IsEnemyAvailable())
-                return;
-
-            EnemyStaticConfig enemyData = _enemiesData.GetRandomItem();
-            
-            IEnemyInstance instance = GetEnemyFromPool(enemyData.Id);
-            if (instance == null) 
-            {
-                instance = CreateNewEnemy();
-            }
-
-            instance.SetupEnemy(enemyData);
-            instance.Spawn(GetRandomSpawnPointOutOfView());
-            _enemyAIService.AddEnemy(instance.MoveController);
+            EnemyStaticConfig enemyData = _enemiesConfigs.GetRandomItem();
+            RequestSpawnEnemy(enemyData, GetRandomSpawnPointOutOfView());
         }
-        
-        private IEnemyInstance GetEnemyFromPool(string typeId)
-        {
-            IEnemyInstance candidateEnemy = null;
-            foreach (IEnemyInstance enemy in _enemiesPool)
-            {
-                if (enemy.Enabled)
-                    continue;
                 
-                candidateEnemy = enemy;
-
-                if (enemy.TypeId.Equals(typeId))
-                    return enemy;
-            }
-
-            return candidateEnemy;
-        }
-
-        //TODO: Not really performant method, should be optimised
-        private bool IsEnemyAvailable()
-        {
-            int activeEnemies = 0;
-            foreach (IEnemyInstance enemy in _enemiesPool)
-            {
-                if (enemy.Enabled)
-                    activeEnemies++;
-
-                if (activeEnemies >= MAX_ENEMIES_COUNT)
-                    return false;
-            }
-
-            return true;
-        }
-
-        private IEnemyInstance CreateNewEnemy()
-        {
-            IEnemyInstance instance = GameObject.Instantiate(RequestEnemyInstancePrefab()).GetComponent<IEnemyInstance>();
-            if (instance == null)
-                throw new Exception("[ENEMY] Can't spawn enemy: basic prefab is incorrect!");
-
-            _enemiesPool.Add(instance);
-
-            return instance;
-        }
 
         private Vector2 GetRandomSpawnPointOutOfView()
         {
