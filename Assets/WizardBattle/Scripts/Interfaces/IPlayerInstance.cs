@@ -9,7 +9,6 @@ namespace IT.WizardBattle.Interfaces
         public Transform ShootingPoint { get; }
 
         public void Initialize(PlayerService playerService, ICharacterData characterData);
-        
         public void Die();
     }
 }

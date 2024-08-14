@@ -7,7 +7,6 @@ namespace IT.WizardBattle.Managers
 {
     public class VFXManager : TypedPoolSpawnManager<VFX, VFX>
     {
-        
         public VFXManager()
         {
             _containerName = "VFX_POOL";

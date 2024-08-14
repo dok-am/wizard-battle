@@ -65,7 +65,6 @@ namespace IT.WizardBattle.Services
             EnemyStaticConfig enemyData = _enemiesConfigs.GetRandomItem();
             RequestSpawnEnemy(enemyData, GetRandomSpawnPointOutOfView());
         }
-                
 
         private Vector2 GetRandomSpawnPointOutOfView()
         {
@@ -76,6 +75,5 @@ namespace IT.WizardBattle.Services
 
             return spawnPoint;
         }
-
     }
 }

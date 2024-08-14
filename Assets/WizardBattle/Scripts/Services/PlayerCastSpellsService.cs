@@ -52,7 +52,6 @@ namespace IT.WizardBattle.Services
             ShootWithCurrentSpell();
         }
 
-
         private void OnSpellHitGameObject(ISpellInstance spell, GameObject hitObject, Vector2 hitPosition)
         {
             spell.OnHitGameObject -= OnSpellHitGameObject;

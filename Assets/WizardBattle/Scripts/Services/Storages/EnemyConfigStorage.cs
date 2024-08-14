@@ -7,7 +7,7 @@ namespace IT.WizardBattle.Services
     {
         public EnemyConfigStorage() 
         {
-            _pathToStorage = "Enemies/";
+            _pathToStorage = "Enemies";
         }
     }
 }

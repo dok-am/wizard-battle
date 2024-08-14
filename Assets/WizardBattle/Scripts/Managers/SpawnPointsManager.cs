@@ -1,6 +1,5 @@
 ﻿using IT.CoreLib.Extensions;
 using IT.CoreLib.Interfaces;
-using System.Collections;
 using UnityEngine;
 
 namespace IT.WizardBattle.Managers

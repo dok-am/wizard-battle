@@ -41,10 +41,5 @@ namespace IT.WizardBattle.Managers
             Vector3 viewportPoint = _camera.WorldToViewportPoint(point);
             return new Rect(0, 0, 1, 1).Contains(viewportPoint);
         }
-
-        public void Unbind() 
-        {
-            //nothing to unbind
-        }
     }
 }
