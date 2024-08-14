@@ -1,4 +1,5 @@
-﻿using IT.WizardBattle.Data;
+﻿using IT.CoreLib.Interfaces;
+using IT.WizardBattle.Data;
 using IT.WizardBattle.Game;
 using System;
 using UnityEngine;
@@ -7,7 +8,7 @@ namespace IT.WizardBattle.Interfaces
 {
     public delegate void EnemyHealthChangeHandler(IEnemyInstance enemy, float health, float maxHealth);
 
-    public interface IEnemyInstance : IDamagable
+    public interface IEnemyInstance : IDamagable, IIdentifiable
     {
         public event Action<IEnemyInstance> OnEnemyReadyToDie;
         public event EnemyHealthChangeHandler OnEnemyHealthChanged;
@@ -15,8 +16,6 @@ namespace IT.WizardBattle.Interfaces
         public GameObject GameObject { get; }
         //TODO: This is a little incorrect, need to be more abstract
         public CharacterMoveController MoveController { get; }
-        public string TypeId { get; }
-        public bool Enabled { get; }
 
         public void SetupEnemy(EnemyStaticConfig characterData);
         public void Deinitialize();

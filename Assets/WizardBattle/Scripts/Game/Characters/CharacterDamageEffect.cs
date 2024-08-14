@@ -31,7 +31,9 @@ namespace IT.WizardBattle.Game
         public void PlayDamageEffect()
         {
             StopAllCoroutines();
-            StartCoroutine(Blinking());
+
+            if (gameObject.activeInHierarchy)
+                StartCoroutine(Blinking());
         }
 
         public void StopDamageEffect()

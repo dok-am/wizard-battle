@@ -1,34 +1,23 @@
-﻿using IT.Game.Services;
+﻿using IT.CoreLib.Managers;
+using IT.Game.Services;
 using IT.WizardBattle.Data;
 using IT.WizardBattle.Game.Battle;
 using IT.WizardBattle.Interfaces;
 using System;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 namespace IT.WizardBattle.Game
 {
     [RequireComponent(typeof(CharacterMoveController))]
-    public class EnemyController : MonoBehaviour, IEnemyInstance
+    public class EnemyController : MonoBehaviour, IEnemyInstance, IPoolableObject
     {
         public event Action<IEnemyInstance> OnEnemyReadyToDie;
         public event EnemyHealthChangeHandler OnEnemyHealthChanged;
+        public event Action<IPoolableObject> ReleaseFromPool;
 
         public GameObject GameObject => gameObject;
-        public string TypeId => _enemyData?.EnemyStaticData?.Id;
-
-        public bool Enabled
-        {
-            get
-            {
-                return gameObject != null && gameObject.activeSelf;
-            }
-            private set
-            {
-                if (gameObject != null) 
-                    gameObject.SetActive(value);
-            }
-        }
-
+        public string Id => _enemyData?.EnemyStaticData?.Id;
         public CharacterMoveController MoveController => _moveController;
 
 
@@ -62,7 +51,7 @@ namespace IT.WizardBattle.Game
         public void Spawn(Vector2 spawnPoint)
         {
             transform.position = spawnPoint;
-            Enabled = true;
+            gameObject.SetActive(true);
         }
 
         public void ReceiveDamage(float damage)
@@ -82,7 +71,8 @@ namespace IT.WizardBattle.Game
         {
             //TODO: add VFX
             _characterDamageEffect.StopDamageEffect();
-            Enabled = false;
+            gameObject.SetActive(false);
+            ReleaseFromPool?.Invoke(this);
         }
 
 

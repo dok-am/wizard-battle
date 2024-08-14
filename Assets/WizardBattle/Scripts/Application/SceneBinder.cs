@@ -28,18 +28,20 @@ namespace IT.WizardBattle.Application
         private CameraManager _cameraManager;
         private SpawnPointsManager _spawnPointsManager;
         private EnemySpawnManager _enemySpawnManager;
+        private VFXManager _VFXManager;
+        private SpellCastManager _spellCastManager;
 
         public override void Bind(IContext context)
         {
             _enemySpawnerService = context.GetService<EnemySpawnerService>();
             _playerCastSpellsService = context.GetService<PlayerCastSpellsService>();
 
-            _playerCastSpellsService.RequestSpellInstancePrefab += GetSpellPrefabGO;
-
             BindSpawnPoints(context);
             BindPlayer(context);
             BindCamera(context);
             BindEnemiesSpawner(context);
+            BindVFX(context);
+            BindSpellCast(context);
         }
 
         public override void Unbind(IContext context)
@@ -52,7 +54,10 @@ namespace IT.WizardBattle.Application
             }
 
             if (_playerCastSpellsService != null)
-                _playerCastSpellsService.RequestSpellInstancePrefab -= GetSpellPrefabGO;
+            {
+                _playerCastSpellsService.RequestCastSpell -= _spellCastManager.CastSpell;
+                _playerCastSpellsService.RequestPlayVFX -= _VFXManager.PlayVisualEffect;
+            }
 
             _playerManager.OnPlayerSpawned -= OnPlayerSpawned;
 
@@ -92,9 +97,25 @@ namespace IT.WizardBattle.Application
         {
             _enemySpawnManager = new(_enemyInstancePrefab, context.GetService<EnemyAIService>());
             _enemySpawnerService.RequestSpawnEnemy += _enemySpawnManager.SpawnEnemyIfPossible;
+
+            AddManager(_enemySpawnManager);
         }
 
-        private GameObject GetSpellPrefabGO() => _spellInstancePrefab.gameObject;
+        private void BindVFX(IContext context)
+        {
+            _VFXManager = new VFXManager();
+            _playerCastSpellsService.RequestPlayVFX += _VFXManager.PlayVisualEffect;
+
+            AddManager(_VFXManager);
+        }
+
+        private void BindSpellCast(IContext context)
+        {
+            _spellCastManager = new SpellCastManager(_spellInstancePrefab);
+            _playerCastSpellsService.RequestCastSpell += _spellCastManager.CastSpell;
+
+            AddManager(_spellCastManager);
+        }
 
         private void OnPlayerSpawned(IPlayerInstance playerInstance)
         {

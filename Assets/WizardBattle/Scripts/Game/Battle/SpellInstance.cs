@@ -1,32 +1,24 @@
-﻿using IT.WizardBattle.Data;
+﻿using IT.CoreLib.Managers;
+using IT.WizardBattle.Data;
 using IT.WizardBattle.Interfaces;
+using System;
 using UnityEngine;
 
 namespace IT.WizardBattle.Game
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class SpellInstance : MonoBehaviour, ISpellInstance
+    public class SpellInstance : MonoBehaviour, ISpellInstance, IPoolableObject
     {
         public event SpellHitHandler OnHitGameObject;
+        public event Action<IPoolableObject> ReleaseFromPool;
 
-        public string SpellId => _spellData?.Id;
-
-        public bool Enabled {
-            get
-            {
-                return gameObject != null && gameObject.activeSelf;
-            }
-            private set 
-            {
-                if (gameObject)
-                    gameObject.SetActive(value);
-            }
-        }
+        public SpellConfig SpellConfig => _spellConfig;
+        public string Id => _spellConfig?.Id;
 
 
         [SerializeField] private Transform _visualsContainer;
 
-        private SpellConfig _spellData;
+        private SpellConfig _spellConfig;
 
         private GameObject _spellVisuals;
         private Rigidbody2D _rigidbody;
@@ -36,7 +28,7 @@ namespace IT.WizardBattle.Game
 
         public void SetupSpell(SpellConfig spellData)
         {
-            _spellData = spellData;
+            _spellConfig = spellData;
 
             _circleCollider.radius = spellData.Radius;
 
@@ -56,7 +48,7 @@ namespace IT.WizardBattle.Game
             transform.position = position;
             transform.rotation = Quaternion.AngleAxis(rotation, Vector3.forward);
 
-            Enabled = true;
+            gameObject.SetActive(true);
             _isShooting = true;
         }
 
@@ -77,15 +69,16 @@ namespace IT.WizardBattle.Game
             if (!_isShooting)
                 return;
 
-            _rigidbody.MovePosition(_rigidbody.position + _spellData.Speed * Time.deltaTime * (Vector2)transform.up);
+            _rigidbody.MovePosition(_rigidbody.position + _spellConfig.Speed * Time.deltaTime * (Vector2)transform.up);
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
             _isShooting = false;
-            Enabled = false;
+            gameObject.SetActive(false);
             Vector2 collisionPoint = collision.contactCount > 0 ? collision.contacts[0].point : collision.otherRigidbody.position;
-            OnHitGameObject?.Invoke(_spellData, collision.gameObject, collisionPoint);
+            OnHitGameObject?.Invoke(this, collision.gameObject, collisionPoint);
+            ReleaseFromPool?.Invoke(this);
         }
     }
 }

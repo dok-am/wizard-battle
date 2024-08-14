@@ -16,7 +16,6 @@ namespace IT.WizardBattle.Application
             AddService<EnemyAIService>();
             AddService<PlayerCastSpellsService>();
             AddService<DamageService>();
-            AddService<VFXService>();
 
             _playerService = AddService<PlayerService>();
             _enemySpawnerService = AddService<EnemySpawnerService>();

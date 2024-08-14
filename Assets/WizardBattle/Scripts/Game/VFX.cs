@@ -1,23 +1,16 @@
-﻿using UnityEngine;
+﻿using IT.CoreLib.Interfaces;
+using IT.CoreLib.Managers;
+using System;
+using UnityEngine;
 
 namespace IT.WizardBattle.Game
 {
-    public class VFX : MonoBehaviour
+    public class VFX : MonoBehaviour, IPoolableObject
     {
+        public event Action<IPoolableObject> ReleaseFromPool;
+
         public string Id => _id;
         public bool IsPlaying => _isPlaying;
-
-        public bool Available  {
-            get 
-            {
-                return gameObject != null && gameObject.activeSelf;
-            }
-            private set 
-            {
-                if (gameObject != null)
-                    gameObject.SetActive(value);
-            }
-        }
 
 
         [SerializeField] private string _id;
@@ -30,7 +23,7 @@ namespace IT.WizardBattle.Game
 
         public void Play(Vector2 position)
         {
-            Available = true;
+            gameObject.SetActive(true);
             transform.position = position;
             _timer = 0;
             _particleSystem.Play();
@@ -42,7 +35,8 @@ namespace IT.WizardBattle.Game
             _timer = 0;
             _particleSystem.Stop();
             _isPlaying = false;
-            Available = false;
+            gameObject.SetActive(false);
+            ReleaseFromPool?.Invoke(this);
         }
 
 
